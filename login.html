@@ -1,0 +1,257 @@
+<!DOCTYPE html><html class="light" lang="en" ><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Log In | GRAVLOC Aerospace</title>
+ <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7385FFBGNM"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-7385FFBGNM');
+    </script>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;family=JetBrains+Mono:wght@500&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;family=JetBrains+Mono:wght@100..900&amp;family=Space+Grotesk:wght@100..900&amp;display=swap" rel="stylesheet">
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fbf9fb;
+        }
+        .mono-accent {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .headline {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        /* Custom focus ring for aerospace precision feel */
+        .input-focus-ring:focus {
+            outline: none;
+            border-color: #0EA5A4;
+            box-shadow: 0 0 0 2px rgba(14, 165, 164, 0.1);
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-container": "#586377",
+                    "secondary-fixed": "#d8e3fb",
+                    "surface-variant": "#e4e2e4",
+                    "surface-container": "#efedef",
+                    "on-primary-fixed-variant": "#36485e",
+                    "on-primary-fixed": "#081d30",
+                    "tertiary-fixed-dim": "#e7bf97",
+                    "tertiary-container": "#2e1901",
+                    "on-background": "#1b1c1d",
+                    "inverse-surface": "#303032",
+                    "surface-tint": "#4e6077",
+                    "secondary": "#545f73",
+                    "on-primary": "#ffffff",
+                    "surface-dim": "#dbd9db",
+                    "primary-fixed-dim": "#b5c8e3",
+                    "outline": "#74777d",
+                    "surface-container-lowest": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "on-tertiary": "#ffffff",
+                    "surface-bright": "#fbf9fb",
+                    "on-secondary-fixed": "#111c2d",
+                    "on-tertiary-container": "#a27f5b",
+                    "on-primary-container": "#7587a0",
+                    "error": "#ba1a1a",
+                    "secondary-container": "#d5e0f8",
+                    "primary-container": "#0b1f33",
+                    "on-tertiary-fixed": "#2b1700",
+                    "tertiary-fixed": "#ffdcbb",
+                    "on-secondary": "#ffffff",
+                    "secondary-fixed-dim": "#bcc7de",
+                    "on-surface-variant": "#44474c",
+                    "background": "#fbf9fb",
+                    "surface-container-high": "#e9e7e9",
+                    "on-surface": "#1b1c1d",
+                    "surface-container-highest": "#e4e2e4",
+                    "on-secondary-fixed-variant": "#3c475a",
+                    "inverse-primary": "#b5c8e3",
+                    "error-container": "#ffdad6",
+                    "outline-variant": "#c4c6cd",
+                    "tertiary": "#090300",
+                    "primary": "#00050e",
+                    "on-tertiary-fixed-variant": "#5d4123",
+                    "surface": "#fbf9fb",
+                    "on-error": "#ffffff",
+                    "surface-container-low": "#f5f3f5",
+                    "primary-fixed": "#d1e4ff",
+                    "inverse-on-surface": "#f2f0f2"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "unit": "4px",
+                    "margin-desktop": "48px",
+                    "gutter": "24px",
+                    "margin-mobile": "16px",
+                    "container-max": "1440px"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": ["Space Grotesk"],
+                    "headline-md": ["Space Grotesk"],
+                    "button-text": ["Inter"],
+                    "label-mono": ["JetBrains Mono"],
+                    "body-lg": ["Inter"],
+                    "headline-lg": ["Space Grotesk"],
+                    "body-md": ["Inter"],
+                    "display-lg": ["Space Grotesk"],
+                    "body-sm": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "button-text": ["14px", {"lineHeight": "20px", "fontWeight": "600"}],
+                    "label-mono": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+</head>
+<body class="bg-background text-on-surface min-h-screen flex flex-col">
+<!-- TopNavBar (Simplified for Auth Flow) -->
+<header class="fixed top-0 w-full flex justify-between items-center px-margin-mobile md:px-margin-desktop py-6 z-50 bg-transparent">
+<div class="flex items-center gap-2">
+
+
+</div>
+<div class="hidden md:flex gap-8 items-center">
+
+</div>
+</header>
+<main class="flex-grow flex flex-col md:flex-row min-h-screen pt-0">
+<!-- Left Side: Visual Inspiration -->
+<section class="hidden md:block w-1/2 relative bg-primary-container">
+<div class="absolute inset-0 opacity-80 mix-blend-overlay pointer-events-none">
+<!-- Using the dashboard image as a background texture for tech-feel inspiration -->
+<div class="w-full h-full bg-cover bg-center" style="background-image: url(&quot;https://lh3.googleusercontent.com/aida/AP1WRLuDFJoT4dvCLhC0GtqxJs-4kg7glgeNh7QzQqGMXRj7fNtN18MUzFX_tnngFWbU9r0LT1G9QSVEFojI_C2koxnO29skDfg1vwpneGwmgWlGOsIRW4eftvH2gNJDCv_WojkWYLsv79QaxW3V-V3ydwKBaOQGtdL1sAvDOvvWrGAbG-M3YT6H7O1MIS1vAM80aq2ukSBp_shKdOIyVboLSOaVnb8xrBuI3fSurIt4_XblX54Vk6xLmpHcNDhh&quot;); filter: grayscale(100%) brightness(0.4);"></div>
+</div>
+<!-- Atmospheric Overlay for Aerospace Precision -->
+<div class="absolute inset-0 flex flex-col justify-center p-margin-desktop bg-gradient-to-t from-primary-container/90 to-transparent">
+<div class="max-w-lg mb-8">
+
+<h1 class="font-display-lg text-display-lg text-on-primary mb-4">Precision-Engineered Aerospace Procurement.</h1>
+<p class="font-body-lg text-body-lg text-secondary-fixed opacity-90">Access the global marketplace for space-grade hardware and verified satellite components.</p>
+</div>
+<!-- Subtle technical grid decoration -->
+<div class="grid grid-cols-3 gap-8 border-t border-white/10 pt-8">
+<div>
+<div class="font-label-mono text-label-mono text-on-primary-container">ITAR COMPLIANT</div>
+<div class="font-headline-md text-headline-md text-on-primary mt-1">100%</div>
+</div>
+<div>
+<div class="font-label-mono text-label-mono text-on-primary-container">ACTIVE VENDORS</div>
+<div class="font-headline-md text-headline-md text-on-primary mt-1">2.4k+</div>
+</div>
+<div>
+<div class="font-label-mono text-label-mono text-on-primary-container">PARTS VERIFIED</div>
+<div class="font-headline-md text-headline-md text-on-primary mt-1">15k+</div>
+</div>
+</div>
+</div>
+<!-- Dynamic UI Micro-elements -->
+
+</section>
+
+</section>
+<!-- Right Side: Login Form -->
+<section class="w-full md:w-1/2 flex items-center justify-center p-6 md:p-12 lg:p-24 bg-surface-bright overflow-y-auto"><div class="w-full max-w-md">
+<div class="mb-10">
+<h2 class="font-headline-lg text-headline-lg text-primary mb-2">Welcome Back</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Secure terminal access for professionals.</p>
+</div>
+<form class="space-y-6" onsubmit="event.preventDefault();">
+<!-- Email Field -->
+<div class="space-y-1.5">
+<label class="font-button-text text-button-text text-on-surface uppercase tracking-wider block" for="email">Corporate Email</label>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline-variant group-focus-within:text-on-primary-container">alternate_email</span>
+<input class="w-full pl-10 pr-4 py-3 bg-white border border-outline-variant rounded transition-all input-focus-ring font-body-md text-body-md" id="email" placeholder="john.doe@aerospace.com" type="email">
+</div>
+</div>
+<!-- Password Field -->
+<div class="space-y-1.5">
+<div class="flex justify-between items-center">
+<label class="font-button-text text-button-text text-on-surface uppercase tracking-wider" for="password">Security Password</label>
+<a class="font-label-mono text-label-mono text-on-primary-container hover:text-primary transition-colors underline underline-offset-4" href="forgot-password.html">Forgot PIN?</a>
+</div>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline-variant group-focus-within:text-on-primary-container">lock</span>
+<input class="w-full pl-10 pr-12 py-3 bg-white border border-outline-variant rounded transition-all input-focus-ring font-body-md text-body-md" id="password" placeholder="••••••••••••" type="password">
+<button class="absolute right-3 top-1/2 -translate-y-1/2 text-outline-variant hover:text-on-surface" type="button">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+</div>
+</div>
+<!-- Remember Me -->
+<div class="flex items-center gap-3">
+<input class="w-4 h-4 rounded border-outline-variant text-primary-container focus:ring-primary-container" id="remember" type="checkbox">
+<label class="font-body-sm text-body-sm text-on-surface-variant cursor-pointer select-none" for="remember">Maintain persistent session on this hardware</label>
+</div>
+<!-- CTA Button -->
+<a href="dashboard.html" class="w-full bg-primary-container text-white py-4 px-6 rounded-lg font-button-text text-button-text hover:bg-primary transition-all active:scale-[0.98] flex items-center justify-center gap-2 group shadow-lg shadow-primary-container/20">
+  <span class="">ESTABLISH SECURE LINK</span>
+  <span class="material-symbols-outlined text-[18px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</form>
+<div class="mt-12 pt-8 border-t border-surface-variant text-center">
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                        Unauthorized access is strictly prohibited. 
+                        <a class="text-primary font-semibold hover:underline ml-1" href="#">Request specialized credentials</a>
+</p>
+</div>
+<div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4 text-center">
+<p class="font-body-sm text-body-sm text-on-surface-variant">New to the platform?</p>
+<a class="font-button-text text-button-text text-on-primary-container border border-outline-variant px-6 py-2 rounded hover:bg-surface-container transition-colors" href="signup.html">Create an account</a>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="md:absolute md:bottom-0 w-full flex flex-col md:flex-row justify-between items-center px-margin-mobile md:px-margin-desktop py-8 z-50 bg-transparent pointer-events-none">
+
+
+</footer>
+<script>
+        // Simple micro-interaction for button hover state
+        const loginBtn = document.querySelector('button');
+        loginBtn.addEventListener('mousedown', () => {
+            loginBtn.style.transform = 'scale(0.97)';
+        });
+        loginBtn.addEventListener('mouseup', () => {
+            loginBtn.style.transform = 'scale(1)';
+        });
+
+        // Toggle password visibility interaction
+        const passToggle = document.querySelector('button[type="button"]');
+        const passInput = document.getElementById('password');
+        passToggle.addEventListener('click', () => {
+            const isPass = passInput.type === 'password';
+            passInput.type = isPass ? 'text' : 'password';
+            passToggle.querySelector('span').textContent = isPass ? 'visibility_off' : 'visibility';
+        });
+    </script>
+
+
+</body></html>

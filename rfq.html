@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>RFQs | GRAVLOC Aerospace</title>
+     <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7385FFBGNM"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-7385FFBGNM');
+    </script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#00050e",
+                        "primary-container": "#0b1f33",
+                        "on-primary-container": "#7587a0",
+                        "secondary": "#545f73",
+                        "surface": "#fbf9fb",
+                        "surface-container": "#efedef",
+                        "surface-container-low": "#f5f3f5",
+                        "surface-container-highest": "#e4e2e4",
+                        "outline": "#74777d",
+                        "outline-variant": "#c4c6cd",
+                        "on-surface": "#1b1c1d",
+                        "on-surface-variant": "#44474c",
+                        "accent-cyan": "#38BDF8",
+                        "error": "#ba1a1a",
+                        "success": "#0f973d",
+                        "warning": "#f59e0b"
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.25rem",
+                        lg: "0.5rem",
+                        xl: "0.75rem",
+                        full: "9999px"
+                    },
+                    spacing: {
+                        "margin-desktop": "48px",
+                        "gutter": "24px",
+                        "margin-mobile": "16px",
+                        "container-max": "1440px"
+                    },
+                    fontFamily: {
+                        "headline-lg": ["Space Grotesk"],
+                        "headline-md": ["Space Grotesk"],
+                        "label-mono": ["JetBrains Mono"],
+                        "body-md": ["Inter"],
+                        "body-sm": ["Inter"]
+                    },
+                    fontSize: {
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "label-mono": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fbf9fb;
+            color: #1b1c1d;
+        }
+        .rfq-card {
+            transition: all 0.2s ease;
+        }
+        .rfq-card:hover {
+            border-color: #0b1f33;
+            box-shadow: 0 4px 16px rgba(11, 31, 51, 0.06);
+        }
+        .status-badge {
+            font-size: 9px;
+            letter-spacing: 0.05em;
+        }
+        .status-badge.draft {
+            background: #e4e2e4;
+            color: #1b1c1d;
+        }
+        .status-badge.pending {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        .status-badge.quoted {
+            background: #d1fae5;
+            color: #065f46;
+        }
+        .status-badge.completed {
+            background: #e0e7ff;
+            color: #3730a3;
+        }
+        .status-badge.expired {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+        .filter-tab {
+            transition: all 0.15s ease;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+        }
+        .filter-tab:hover {
+            color: #0b1f33;
+        }
+        .filter-tab.active {
+            color: #0b1f33;
+            border-bottom-color: #0b1f33;
+            font-weight: 600;
+        }
+        .stat-card {
+            transition: all 0.2s ease;
+            border: 1px solid #e4e2e4;
+        }
+        .stat-card:hover {
+            border-color: #0b1f33;
+            box-shadow: 0 8px 24px rgba(11, 31, 51, 0.06);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+
+<!-- ============================================================ -->
+<!-- HEADER -->
+<!-- ============================================================ -->
+<header class="sticky top-0 z-50 bg-surface border-b border-outline-variant h-16 md:h-20 w-full">
+    <div class="max-w-container-max mx-auto px-4 md:px-margin-desktop flex justify-between items-center h-full">
+        <div class="flex items-center gap-2 md:gap-8">
+            <button id="mobile-menu-btn" class="lg:hidden -ml-2 p-2 text-on-background" aria-label="Open menu">
+                <span class="material-symbols-outlined">menu</span>
+            </button>
+            <a href="index.html" class="flex items-center gap-1 md:gap-2">
+                <span class="font-headline-lg text-sm md:text-headline-md font-bold tracking-tighter text-primary">GRAVLOC</span>
+            </a>
+            <nav class="hidden lg:flex items-center gap-6">
+                <a class="font-label-mono text-label-mono text-on-surface-variant hover:text-primary transition-colors pb-1" href="dashboard.html">Catalogue</a>
+                <a class="font-label-mono text-label-mono text-on-surface-variant hover:text-primary transition-colors pb-1" href="#">Compare</a>
+                <a class="font-label-mono text-label-mono text-primary font-bold border-b-2 border-primary pb-1" href="#">RFQs</a>
+                <a class="font-label-mono text-label-mono text-on-surface-variant hover:text-primary transition-colors pb-1" href="#">Suppliers</a>
+                <a class="font-label-mono text-label-mono text-on-surface-variant hover:text-primary transition-colors pb-1" href="#">My AVL</a>
+            </nav>
+        </div>
+        <div class="flex items-center gap-2 md:gap-6">
+            <div class="hidden lg:flex items-center gap-2 px-3 py-1.5 bg-surface-container-low rounded border border-outline-variant">
+                <span class="material-symbols-outlined text-[18px]">search</span>
+                <span class="font-label-mono text-label-mono text-on-surface-variant">Quick Search</span>
+                <span class="font-label-mono text-[10px] bg-outline-variant px-1 rounded">⌘K</span>
+            </div>
+            <div class="flex items-center gap-2 md:gap-3 pl-0 md:pl-4 md:border-l border-outline-variant">
+                <div class="hidden sm:flex flex-col items-end">
+                    <span class="font-label-mono text-xs md:text-label-mono text-on-surface font-bold">A. Vance</span>
+                    <span class="font-label-mono text-[8px] md:text-[10px] text-on-surface-variant">Procurement Officer</span>
+                </div>
+                <div class="w-8 h-8 md:w-10 md:h-10 rounded-full bg-primary-container flex items-center justify-center text-white">
+                    <span class="material-symbols-outlined text-sm md:text-base">account_circle</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden lg:hidden bg-surface border-b border-outline-variant shadow-lg">
+        <nav class="flex flex-col px-4 py-4 gap-1">
+            <a class="font-label-mono text-label-mono text-on-surface-variant px-3 py-3 rounded hover:bg-surface-container hover:text-primary" href="dashboard.html">Catalogue</a>
+            <a class="font-label-mono text-label-mono text-on-surface-variant px-3 py-3 rounded hover:bg-surface-container hover:text-primary" href="#">Compare</a>
+            <a class="font-label-mono text-label-mono text-primary font-bold px-3 py-3 rounded hover:bg-surface-container" href="#">RFQs</a>
+            <a class="font-label-mono text-label-mono text-on-surface-variant px-3 py-3 rounded hover:bg-surface-container hover:text-primary" href="#">Suppliers</a>
+            <a class="font-label-mono text-label-mono text-on-surface-variant px-3 py-3 rounded hover:bg-surface-container hover:text-primary" href="#">My AVL</a>
+        </nav>
+    </div>
+</header>
+
+<!-- ============================================================ -->
+<!-- HERO SECTION -->
+<!-- ============================================================ -->
+<section class="bg-gradient-to-br from-primary-container/5 via-surface to-surface py-8 md:py-16 border-b border-outline-variant">
+    <div class="max-w-container-max mx-auto px-4 md:px-margin-desktop">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+            <div>
+                <div class="inline-flex items-center gap-2 px-3 py-1 bg-secondary-container text-on-secondary-container rounded-full mb-3">
+                    <span class="material-symbols-outlined text-[14px] md:text-[16px]" style="font-variation-settings: 'FILL' 1;">description</span>
+                    <span class="font-label-mono text-[8px] md:text-[10px] uppercase tracking-widest">RFQ Management</span>
+                </div>
+                <h1 class="font-headline-lg text-2xl md:text-headline-lg text-primary">Request for Quotations</h1>
+                <p class="font-body-sm text-sm md:text-body-sm text-on-surface-variant mt-1">Track, manage, and respond to all your RFQs in one place.</p>
+            </div>
+            <button class="bg-primary-container text-white px-4 md:px-6 py-2.5 md:py-3 rounded-lg font-button-text text-sm md:text-base hover:bg-primary transition-all flex items-center gap-2 flex-shrink-0">
+                <span class="material-symbols-outlined text-sm md:text-base">add</span>
+                New RFQ
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- STATS ROW -->
+<!-- ============================================================ -->
+<section class="py-4 md:py-6 bg-surface-container-low border-b border-outline-variant">
+    <div class="max-w-container-max mx-auto px-4 md:px-margin-desktop">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+            <div class="stat-card bg-white rounded-lg p-3 md:p-5 text-center">
+                <div class="flex items-center justify-center gap-1 md:gap-2 text-accent-cyan">
+                    <span class="material-symbols-outlined text-lg md:text-2xl">description</span>
+                    <span class="font-headline-md text-lg md:text-headline-md text-primary">12</span>
+                </div>
+                <p class="font-label-mono text-[8px] md:text-[10px] uppercase text-on-surface-variant tracking-wider">Total RFQs</p>
+            </div>
+            <div class="stat-card bg-white rounded-lg p-3 md:p-5 text-center">
+                <div class="flex items-center justify-center gap-1 md:gap-2 text-warning">
+                    <span class="material-symbols-outlined text-lg md:text-2xl">pending</span>
+                    <span class="font-headline-md text-lg md:text-headline-md text-primary">4</span>
+                </div>
+                <p class="font-label-mono text-[8px] md:text-[10px] uppercase text-on-surface-variant tracking-wider">Pending</p>
+            </div>
+            <div class="stat-card bg-white rounded-lg p-3 md:p-5 text-center">
+                <div class="flex items-center justify-center gap-1 md:gap-2 text-success">
+                    <span class="material-symbols-outlined text-lg md:text-2xl">check_circle</span>
+                    <span class="font-headline-md text-lg md:text-headline-md text-primary">5</span>
+                </div>
+                <p class="font-label-mono text-[8px] md:text-[10px] uppercase text-on-surface-variant tracking-wider">Quoted</p>
+            </div>
+            <div class="stat-card bg-white rounded-lg p-3 md:p-5 text-center">
+                <div class="flex items-center justify-center gap-1 md:gap-2 text-primary-container">
+                    <span class="material-symbols-outlined text-lg md:text-2xl">done_all</span>
+                    <span class="font-headline-md text-lg md:text-headline-md text-primary">3</span>
+                </div>
+                <p class="font-label-mono text-[8px] md:text-[10px] uppercase text-on-surface-variant tracking-wider">Completed</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- FILTER TABS -->
+<!-- ============================================================ -->
+<section class="py-4 md:py-6 bg-surface border-b border-outline-variant">
+    <div class="max-w-container-max mx-auto px-4 md:px-margin-desktop">
+        <div class="flex flex-wrap items-center gap-4 md:gap-6">
+            <div class="flex flex-wrap gap-3 md:gap-6">
+                <span class="filter-tab active text-xs md:text-label-mono font-label-mono text-primary border-b-2 border-primary pb-2" data-filter="all">All RFQs</span>
+                <span class="filter-tab text-xs md:text-label-mono font-label-mono text-on-surface-variant pb-2" data-filter="draft">Drafts</span>
+                <span class="filter-tab text-xs md:text-label-mono font-label-mono text-on-surface-variant pb-2" data-filter="pending">Pending</span>
+                <span class="filter-tab text-xs md:text-label-mono font-label-mono text-on-surface-variant pb-2" data-filter="quoted">Quoted</span>
+                <span class="filter-tab text-xs md:text-label-mono font-label-mono text-on-surface-variant pb-2" data-filter="completed">Completed</span>
+                <span class="filter-tab text-xs md:text-label-mono font-label-mono text-on-surface-variant pb-2" data-filter="expired">Expired</span>
+            </div>
+            <div class="ml-auto flex items-center gap-2">
+                <span class="material-symbols-outlined text-on-surface-variant text-sm md:text-base">search</span>
+                <input class="border-none focus:ring-0 font-body-sm text-sm text-primary placeholder:text-outline-variant bg-transparent min-w-[120px] md:min-w-[200px]" placeholder="Search RFQs..." type="text">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- RFQ LIST -->
+<!-- ============================================================ -->
+<section class="py-6 md:py-10 bg-surface">
+    <div class="max-w-container-max mx-auto px-4 md:px-margin-desktop">
+        <div class="space-y-4 md:space-y-6">
+
+            <!-- RFQ Card 1 - Quoted -->
+            <div class="rfq-card bg-white border border-outline-variant rounded-xl p-4 md:p-6">
+                <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+                    <div class="flex-1 space-y-2">
+                        <div class="flex flex-wrap items-center gap-2 md:gap-3">
+                            <span class="font-headline-md text-base md:text-headline-md text-primary">#RFQ-2481</span>
+                            <span class="status-badge quoted px-2 py-0.5 rounded uppercase text-[8px] md:text-[9px]">Quoted</span>
+                            <span class="font-label-mono text-[8px] md:text-[10px] text-on-surface-variant">Created: 2 days ago</span>
+                        </div>
+                        <h3 class="font-headline-md text-base md:text-headline-md text-primary">LX-400 Rad-Hard FPGA</h3>
+                        <div class="flex flex-wrap items-center gap-3 md:gap-6 text-xs md:text-body-sm text-on-surface-variant">
+                            <span>Qty: 25 units</span>
+                            <span>Target Delivery: 12 weeks</span>
+                            <span class="flex items-center gap-1">
+                                <span class="material-symbols-outlined text-sm">business</span>
+                                NexGen Systems
+                            </span>
+                        </div>
+                        <div class="flex flex-wrap items-center gap-3 pt-1">
+                            <span class="bg-success/10 text-success text-[10px] md:text-[12px] font-label-mono px-2 py-0.5 rounded">Quote Received: €42,500</span>
+                            <span class="bg-surface-container text-on-surface-variant text-[10px] md:text-[12px] font-label-mono px-2 py-0.5 rounded">Lead: 8-10 wks</span>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-2 md:gap-3 flex-shrink-0">
+                        <button class="text-primary-container font-label-mono text-[9px] md:text-[10px] hover:underline">View Details</button>
+                        <button class="bg-primary-container text-white px-3 md:px-4 py-1.5 md:py-2 rounded font-label-mono text-[9px] md:text-[10px] hover:bg-primary transition-colors">Accept Quote</button>
+                        <button class="border border-outline-variant text-on-surface-variant px-3 md:px-4 py-1.5 md:py-2 rounded font-label-mono text-[9px] md:text-[10px] hover:bg-surface-container transition-colors">Negotiate</button>
+                    </div>
+                </div>
+                <div class="mt-3 md:mt-4 pt-3 md:pt-4 border-t border-outline-variant/30 flex flex-wrap items-center justify-between gap-2">
+                    <div class="flex items-center gap-3 text-on-surface-variant">
+                        <span class="material-symbols-outlined text-sm md:text-base">chat</span>
+                        <span class="font-body-sm text-xs md:text-body-sm">2 messages with supplier</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-success"></span>
+                        <span class="font-label-mono text-[8px] md:text-[10px] text-success">Response received</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RFQ Card 2 - Pending -->
+            <div class="rfq-card bg-white border border-outline-variant rounded-xl p-4 md:p-6">
+                <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+                    <div class="flex-1 space-y-2">
+                        <div class="flex flex-wrap items-center gap-2 md:gap-3">
+                            <span class="font-headline-md text-base md:text-headline-md text-primary">#RFQ-2479</span>
+                            <span class="status-badge pending px-2 py-0.5 rounded uppercase text-[8px] md:text-[9px]">Pending</span>
+                            <span class="font-label-mono text-[8px] md:text-[10px] text-on-surface-variant">Created: 1 day ago</span>
+                        </div>
+                        <h3 class="font-headline-md text-base md:text-headline-md text-primary">HE-300 Solar Panel Array</h3>
+                        <div class="flex flex-wrap items-center gap-3 md:gap-6 text-xs md:text-body-sm text-on-surface-variant">
+                            <span>Qty: 50 units</span>
+                            <span>Target Delivery: 14 weeks</span>
+                            <span class="flex items-center gap-1">
+                                <span class="material-symbols-outlined text-sm">business</span>
+                                Helios Power
+                            </span>
+                        </div>
+                        <div class="flex flex-wrap items-center gap-3 pt-1">
+                            <span class="bg-warning/10 text-warning text-[10px] md:text-[12px] font-label-mono px-2 py-0.5 rounded">Awaiting supplier response</span>
+                            <span class="bg-surface-container text-on-surface-variant text-[10px] md:text-[12px] font-label-mono px-2 py-0.5 rounded">3 suppliers invited</span>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-2 md:gap-3 flex-shrink-0">
+                        <button class="text-primary-container font-label-mono text-[9px] md:text-[10px] hover:underline">View Details</button>
+                        <button class="bg-primary-container text-white px-3 md:px-4 py-1.5 md:py-2 rounded font-label-mono text-[9px] md:text-[10px] hover:bg-primary transition-colors">Remind Suppliers</button>
+                        <button class="border border-outline-variant text-on-surface-variant px-3 md:px-4 py-1.5 md:py-2 rounded font-label-mono text-[9px] md:text-[10px] hover:bg-surface-container transition-colors">Edit</button>
+                    </div>
+                </div>
+                <div class="mt-3 md:mt-4 pt-3 md:pt-4 border-t border-outline-variant/30 flex flex-wrap items-center justify-between gap-2">
+                    <div class="flex items-center gap-3 text-on-surface-variant">
+                        <span class="material-symbols-outlined text-sm md:text-base">schedule</span>
+                        <span class="font-body-sm text-xs md:text-body-sm">Response expected in 48 hours</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-warning animate-pulse"></span>
+                        <span class="font-label-mono text-[8px] md:text-[10px] text-warning">Awaiting response</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RFQ Card 3 - Completed -->
+            <div class="rfq-card bg-white border border-outline-variant rounded-xl p-4 md:p-6">
+                <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+                    <div class="flex-1 space-y-2">
+                        <div class="flex flex-wrap items-center gap-2 md:gap-3">
+                            <span class="font-headline-md text-base md:text-headline-md text-primary">#RFQ-2477</span>
+                            <span class="status-badge completed px-2 py-0.5 rounded uppercase text-[8px] md:text-[9px]">Completed</span>
+                            <span class="font-label-mono text-[8px] md:text-[10px] text-on-surface-variant">Created: 2 weeks ago</span>
+                        </div>
+                        <h3 class="font-headline-md text-base md:text-headline-md text-primary">A-90 Star Tracker</h3>
+                        <div class="flex flex-wrap items-center gap-3 md:gap-6 text-xs md:text-body-sm text-on-surface-variant">
+                            <span>Qty: 3 units</span>
+                            <span>Target Delivery: 6 weeks</span>
+                            <span class="flex items-center gap-1">
+                                <span class="material-symbols-outlined text-sm">business</span>
+                                Orion Optics
+                            </span>
+                        </div>
+                        <div class="flex flex-wrap items-center gap-3 pt-1">
+                            <span class="bg-success/10 text-success text-[10px] md:text-[12px] font-label-mono px-2 py-0.5 rounded">Order Placed</span>
+                            <span class="bg-surface-container text-on-surface-variant text-[10px] md:text-[12px] font-label-mono px-2 py-0.5 rounded">€18,750</span>
+                            <span class="bg-surface-container text-on-surface-variant text-[10px] md:text-[12px] font-label-mono px-2 py-0.5 rounded">In production</span>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-2 md:gap-3 flex-shrink-0">
+                        <button class="text-primary-container font-label-mono text-[9px] md:text-[10px] hover:underline">View Order</button>
+                        <button class="border border-outline-variant text-on-surface-variant px-3 md:px-4 py-1.5 md:py-2 rounded font-label-mono text-[9px] md:text-[10px] hover:bg-surface-container transition-colors">Reorder</button>
+                    </div>
+                </div>
+                <div class="mt-3 md:mt-4 pt-3 md:pt-4 border-t border-outline-variant/30 flex flex-wrap items-center justify-between gap-2">
+                    <div class="flex items-center gap-3 text-on-surface-variant">
+                        <span class="material-symbols-outlined text-sm md:text-base">check_circle</span>
+                        <span class="font-body-sm text-xs md:text-body-sm">Delivered on: 22 Jun 2026</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-success"></span>
+                        <span class="font-label-mono text-[8px] md:text-[10px] text-success">Completed</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RFQ Card 4 - Expired -->
+            <div class="rfq-card bg-white border border-outline-variant rounded-xl p-4 md:p-6 opacity-70">
+                <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+                    <div class="flex-1 space-y-2">
+                        <div class="flex flex-wrap items-center gap-2 md:gap-3">
+                            <span class="font-headline-md text-base md:text-headline-md text-primary">#RFQ-2475</span>
+                            <span class="status-badge expired px-2 py-0.5 rounded uppercase text-[8px] md:text-[9px]">Expired</span>
+                            <span class="font-label-mono text-[8px] md:text-[10px] text-on-surface-variant">Created: 1 month ago</span>
+                        </div>
+                        <h3 class="font-headline-md text-base md:text-headline-md text-primary">X-Band Antenna System</h3>
+                        <div class="flex flex-wrap items-center gap-3 md:gap-6 text-xs md:text-body-sm text-on-surface-variant">
+                            <span>Qty: 8 units</span>
+                            <span>Target Delivery: 8 weeks</span>
+                            <span class="flex items-center gap-1">
+                                <span class="material-symbols-outlined text-sm">business</span>
+                                ComTech Aerospace
+                            </span>
+                        </div>
+                        <div class="flex flex-wrap items-center gap-3 pt-1">
+                            <span class="bg-error/10 text-error text-[10px] md:text-[12px] font-label-mono px-2 py-0.5 rounded">No quotes received</span>
+                            <span class="bg-surface-container text-on-surface-variant text-[10px] md:text-[12px] font-label-mono px-2 py-0.5 rounded">Expired: 15 Jun 2026</span>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-2 md:gap-3 flex-shrink-0">
+                        <button class="text-primary-container font-label-mono text-[9px] md:text-[10px] hover:underline">View Details</button>
+                        <button class="bg-primary-container text-white px-3 md:px-4 py-1.5 md:py-2 rounded font-label-mono text-[9px] md:text-[10px] hover:bg-primary transition-colors">Renew RFQ</button>
+                    </div>
+                </div>
+                <div class="mt-3 md:mt-4 pt-3 md:pt-4 border-t border-outline-variant/30 flex flex-wrap items-center justify-between gap-2">
+                    <div class="flex items-center gap-3 text-on-surface-variant">
+                        <span class="material-symbols-outlined text-sm md:text-base">info</span>
+                        <span class="font-body-sm text-xs md:text-body-sm">No suppliers responded</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-error"></span>
+                        <span class="font-label-mono text-[8px] md:text-[10px] text-error">Expired</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Load More -->
+        <div class="mt-8 md:mt-10 text-center">
+            <button class="border border-outline-variant text-on-surface-variant px-6 md:px-8 py-2.5 md:py-3 rounded-lg font-button-text text-sm md:text-base hover:bg-surface-container transition-colors">
+                Load More RFQs
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- FOOTER -->
+<!-- ============================================================ -->
+<footer class="bg-[#303032] border-t border-[#c4c6cd]">
+    <div class="max-w-container-max mx-auto px-4 md:px-margin-desktop py-12 md:py-16 grid grid-cols-12 gap-4 md:gap-gutter">
+        <div class="col-span-12 lg:col-span-4 space-y-4 md:space-y-6">
+            <img alt="GRAVLOC" class="h-6 md:h-8 w-auto object-contain brightness-0 invert" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjsSv4799yK9-MHKyNleAkZOa3IMtVQT45gksNHw-YsdPIOqU1Vfp1SqEhWgSU3u-yOxEhD6TrtdwHvz0eK83tyTLBSfZLgWYc6fhUz2Cj5mrjr06Wx2SjvCiYDRaxyANgtg62ZGYxg-UDDY2GFZJCWzU7RWgr6fCfeXs6vRWrjUsHIuGtd8HoXKQzfwNwREHNjxdsqNssM-tegcA3zDsWZ_TQZSeU4cxXONIOPhnzPqNGYIlhSfNWjtWZgp4ExFYvIrDxCzrFdVfa">
+            <p class="text-[#f2f0f2] font-body-sm max-w-xs opacity-70 text-sm md:text-body-sm">
+                © 2026 GRAVLOC. All rights reserved. Precision procurement for mission-critical systems.
+            </p>
+            <div class="flex gap-4">
+                <a href="#" class="text-[#f2f0f2] opacity-70 hover:opacity-100 transition-opacity" aria-label="Facebook">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                </a>
+                <a href="#" class="text-[#f2f0f2] opacity-70 hover:opacity-100 transition-opacity" aria-label="LinkedIn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                </a>
+                <a href="#" class="text-[#f2f0f2] opacity-70 hover:opacity-100 transition-opacity" aria-label="Instagram">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg>
+                </a>
+            </div>
+        </div>
+        <div class="col-span-6 lg:col-span-2 space-y-3 md:space-y-4">
+            <h4 class="font-label-mono text-[10px] md:text-xs text-white uppercase tracking-widest">Platform</h4>
+            <ul class="space-y-1.5 md:space-y-2">
+                <li><a class="text-[#c4c6cd] hover:text-white transition-colors text-xs md:text-body-sm" href="dashboard.html">Catalogue</a></li>
+                <li><a class="text-[#c4c6cd] hover:text-white transition-colors text-xs md:text-body-sm" href="#">Compare</a></li>
+                <li><a class="text-[#c4c6cd] hover:text-white transition-colors text-xs md:text-body-sm" href="#">RFQs</a></li>
+                <li><a class="text-[#c4c6cd] hover:text-white transition-colors text-xs md:text-body-sm" href="#">Suppliers</a></li>
+            </ul>
+        </div>
+        <div class="col-span-6 lg:col-span-2 space-y-3 md:space-y-4">
+            <h4 class="font-label-mono text-[10px] md:text-xs text-white uppercase tracking-widest">Compliance</h4>
+            <ul class="space-y-1.5 md:space-y-2">
+                <li><a class="text-[#c4c6cd] hover:text-white transition-colors text-xs md:text-body-sm" href="#">ITAR Policy</a></li>
+                <li><a class="text-[#c4c6cd] hover:text-white transition-colors text-xs md:text-body-sm" href="#">Quality Assurance</a></li>
+                <li><a class="text-[#c4c6cd] hover:text-white transition-colors text-xs md:text-body-sm" href="#">Ethics Code</a></li>
+                <li><a class="text-[#c4c6cd] hover:text-white transition-colors text-xs md:text-body-sm" href="#">Certifications</a></li>
+            </ul>
+        </div>
+        <div class="col-span-6 lg:col-span-2 space-y-3 md:space-y-4">
+            <h4 class="font-label-mono text-[10px] md:text-xs text-white uppercase tracking-widest">Company</h4>
+            <ul class="space-y-1.5 md:space-y-2">
+                <li><a class="text-[#c4c6cd] hover:text-white transition-colors text-xs md:text-body-sm" href="#">About Us</a></li>
+                <li><a class="text-[#c4c6cd] hover:text-white transition-colors text-xs md:text-body-sm" href="#">Privacy Policy</a></li>
+                <li><a class="text-[#c4c6cd] hover:text-white transition-colors text-xs md:text-body-sm" href="#">Terms of Service</a></li>
+            </ul>
+        </div>
+        <div class="col-span-6 lg:col-span-2 space-y-3 md:space-y-4">
+            <h4 class="font-label-mono text-[10px] md:text-xs text-white uppercase tracking-widest">Support</h4>
+            <ul class="space-y-1.5 md:space-y-2">
+                <li><a class="text-[#c4c6cd] hover:text-white transition-colors text-xs md:text-body-sm" href="#">Contact Support</a></li>
+                <li><a class="text-[#c4c6cd] hover:text-white transition-colors text-xs md:text-body-sm" href="#">Documentation</a></li>
+                <li><a class="text-[#c4c6cd] hover:text-white transition-colors text-xs md:text-body-sm" href="#">Supplier Portal</a></li>
+            </ul>
+        </div>
+    </div>
+</footer>
+
+<!-- ============================================================ -->
+<!-- SCRIPTS -->
+<!-- ============================================================ -->
+<script>
+    // Mobile menu toggle
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    if (menuBtn && mobileMenu) {
+        menuBtn.addEventListener('click', () => {
+            const isOpen = !mobileMenu.classList.contains('hidden');
+            mobileMenu.classList.toggle('hidden');
+            menuBtn.setAttribute('aria-expanded', String(!isOpen));
+            menuBtn.querySelector('.material-symbols-outlined').textContent = isOpen ? 'menu' : 'close';
+        });
+    }
+
+    // Filter tabs
+    document.querySelectorAll('.filter-tab').forEach(tab => {
+        tab.addEventListener('click', function() {
+            document.querySelectorAll('.filter-tab').forEach(t => {
+                t.classList.remove('active', 'text-primary', 'border-primary');
+                t.classList.add('text-on-surface-variant');
+            });
+            this.classList.add('active', 'text-primary', 'border-primary');
+            this.classList.remove('text-on-surface-variant');
+        });
+    });
+
+    // Search shortcut
+    document.addEventListener('keydown', (e) => {
+        if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+            e.preventDefault();
+            const searchInput = document.querySelector('input[placeholder*="Search RFQs"]');
+            if (searchInput) searchInput.focus();
+        }
+    });
+</script>
+
+</body>
+</html>

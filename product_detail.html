@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>GRAVLOC Terminal | High Gain X-Band Array</title>
+ <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7385FFBGNM"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-7385FFBGNM');
+    </script>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#00050e",
+                        "primary-fixed": "#d1e4ff",
+                        "on-background": "#1b1c1d",
+                        "on-secondary-container": "#586377",
+                        "on-surface-variant": "#44474c",
+                        "inverse-primary": "#b5c8e3",
+                        "error-container": "#ffdad6",
+                        "surface": "#fbf9fb",
+                        "secondary-fixed-dim": "#bcc7de",
+                        "on-tertiary": "#ffffff",
+                        "on-tertiary-container": "#a27f5b",
+                        "on-error-container": "#93000a",
+                        "primary-container": "#0b1f33",
+                        "on-tertiary-fixed": "#2b1700",
+                        "on-primary-container": "#7587a0",
+                        "on-primary-fixed": "#081d30",
+                        "background": "#fbf9fb",
+                        "surface-tint": "#4e6077",
+                        "outline-variant": "#c4c6cd",
+                        "on-secondary": "#ffffff",
+                        "secondary-container": "#d5e0f8",
+                        "inverse-on-surface": "#f2f0f2",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#5d4123",
+                        "error": "#ba1a1a",
+                        "surface-container-high": "#e9e7e9",
+                        "primary-fixed-dim": "#b5c8e3",
+                        "outline": "#74777d",
+                        "inverse-surface": "#303032",
+                        "surface-dim": "#dbd9db",
+                        "on-surface": "#1b1c1d",
+                        "surface-container-low": "#f5f3f5",
+                        "surface-container": "#efedef",
+                        "surface-variant": "#e4e2e4",
+                        "secondary-fixed": "#d8e3fb",
+                        "on-primary-fixed-variant": "#36485e",
+                        "tertiary": "#090300",
+                        "tertiary-fixed-dim": "#e7bf97",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-fixed": "#ffdcbb",
+                        "tertiary-container": "#2e1901",
+                        "surface-container-highest": "#e4e2e4",
+                        "surface-bright": "#fbf9fb",
+                        "secondary": "#545f73",
+                        "on-secondary-fixed": "#111c2d",
+                        "on-error": "#ffffff",
+                        "on-secondary-fixed-variant": "#3c475a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "container-max": "1440px",
+                        "unit": "4px",
+                        "margin-desktop": "48px",
+                        "margin-mobile": "16px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Space Grotesk"],
+                        "headline-md": ["Space Grotesk"],
+                        "body-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-mono": ["JetBrains Mono"],
+                        "button-text": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "label-mono": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "button-text": ["14px", {"lineHeight": "20px", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #fbf9fb;
+            font-family: 'Inter', sans-serif;
+            color: #1b1c1d;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .technical-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            transition: all 0.2s ease-in-out;
+        }
+        .technical-card:hover {
+            border-color: #0EA5A4;
+        }
+        .glass-nav {
+            background: rgba(251, 249, 251, 0.8);
+            backdrop-filter: blur(12px);
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .mono-data {
+            font-family: 'JetBrains Mono', monospace;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- Mobile/Tablet Sidebar Overlay -->
+<div id="sidebar-overlay" class="hidden fixed inset-0 bg-black/40 z-40 lg:hidden"></div>
+<!-- SideNavBar (Fixed Anchor) -->
+<aside id="side-nav" class="h-screen w-64 fixed left-0 top-0 -translate-x-full lg:translate-x-0 transition-transform duration-300 bg-surface-container-low border-r border-outline-variant flex flex-col p-gutter gap-4 z-50">
+<div class="mb-8 flex items-center justify-between">
+<div>
+<h1 class="font-headline-md text-headline-md text-primary tracking-tighter">GRAVLOC</h1>
+<p class="text-on-surface-variant font-label-mono text-[10px] mt-1 uppercase tracking-widest">Aerospace Terminal</p>
+</div>
+<button id="sidebar-close-btn" class="lg:hidden p-1 text-on-surface-variant hover:text-primary" aria-label="Close menu">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<nav class="flex flex-col gap-2">
+<a class="flex items-center gap-3 px-4 py-3 bg-secondary-container text-on-secondary-container rounded-lg font-button-text transition-transform active:scale-95" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                Overview
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg font-button-text transition-all active:scale-95" href="#">
+<span class="material-symbols-outlined">settings_input_component</span>
+                Specifications
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg font-button-text transition-all active:scale-95" href="#">
+<span class="material-symbols-outlined">verified_user</span>
+                Heritage
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg font-button-text transition-all active:scale-95" href="#">
+<span class="material-symbols-outlined">description</span>
+                Documentation
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg font-button-text transition-all active:scale-95" href="#">
+<span class="material-symbols-outlined">factory</span>
+                Supplier
+            </a>
+</nav>
+<div class="mt-auto border-t border-outline-variant pt-4 flex flex-col gap-2">
+<button class="w-full bg-primary text-on-primary py-3 rounded font-button-text mb-4 transition-transform active:scale-95">
+                Contact Engineer
+            </button>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-container-high rounded-lg text-sm" href="#">
+<span class="material-symbols-outlined">help</span> Support
+            </a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-container-high rounded-lg text-sm" href="#">
+<span class="material-symbols-outlined">settings</span> Settings
+            </a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="lg:ml-64 min-h-screen">
+<!-- TopNavBar -->
+<header class="w-full h-16 sticky top-0 z-30 glass-nav border-b border-outline-variant flex justify-between items-center px-margin-mobile md:px-margin-desktop">
+<div class="flex items-center gap-3 md:gap-8">
+<button id="sidebar-open-btn" class="lg:hidden -ml-2 p-2 text-on-background" aria-label="Open menu" aria-expanded="false" aria-controls="side-nav">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="relative group hidden sm:block">
+<span class="absolute inset-y-0 left-3 flex items-center text-on-surface-variant">
+<span class="material-symbols-outlined text-sm">search</span>
+</span>
+<input class="pl-10 pr-4 py-1.5 bg-surface-container border border-outline-variant rounded-full text-sm w-48 md:w-80 focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all" placeholder="Search components... [K]" type="text"/>
+</div>
+<button id="mobile-search-toggle" class="sm:hidden p-2 text-on-surface-variant hover:text-primary" aria-label="Search">
+<span class="material-symbols-outlined">search</span>
+</button>
+<nav class="hidden md:flex gap-6">
+<a class="font-button-text text-on-surface-variant hover:text-primary transition-colors" href="#">Marketplace</a>
+<a class="font-button-text text-on-surface-variant hover:text-primary transition-colors" href="#">Suppliers</a>
+<a class="font-button-text text-on-surface-variant hover:text-primary transition-colors" href="#">Solutions</a>
+<a class="font-button-text text-on-surface-variant hover:text-primary transition-colors" href="#">Analytics</a>
+</nav>
+</div>
+<div class="flex items-center gap-2 md:gap-4">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="h-8 w-px bg-outline-variant mx-2 hidden sm:block"></div>
+<button class="hidden sm:inline-block bg-primary text-on-primary px-4 py-2 rounded text-button-text transition-all hover:opacity-90 active:scale-95">
+                    Request Quote
+                </button>
+</div>
+</header>
+<!-- Mobile Search Bar -->
+<div id="mobile-search-bar" class="hidden sm:hidden px-margin-mobile py-3 border-b border-outline-variant bg-surface">
+<div class="relative">
+<span class="absolute inset-y-0 left-3 flex items-center text-on-surface-variant">
+<span class="material-symbols-outlined text-sm">search</span>
+</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container border border-outline-variant rounded-full text-sm focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all" placeholder="Search components..." type="text"/>
+</div>
+</div>
+<!-- Product Hero Section (Bento Layout) -->
+<div class="max-w-container-max mx-auto p-margin-mobile md:p-margin-desktop">
+<!-- Breadcrumbs -->
+<nav class="flex items-center gap-2 mb-8 font-label-mono text-[11px] text-on-surface-variant uppercase tracking-widest">
+<a href="dashboard.html" class="hover:text-primary">Marketplace</a>
+<span class="material-symbols-outlined text-[12px]">chevron_right</span>
+<a href="antennas.html" class="hover:text-primary">Antennas</a>
+<span class="material-symbols-outlined text-[12px]">chevron_right</span>
+<span class="text-primary font-bold">High Gain X-Band Array</span>
+</nav>
+<div class="grid grid-cols-12 gap-gutter">
+<!-- Gallery Section -->
+<div class="col-span-12 lg:col-span-7 flex flex-col gap-4">
+<div class="technical-card rounded-xl overflow-hidden aspect-[4/3] relative bg-white">
+<img alt="High Gain X-Band Array antenna" class="w-full h-full object-contain p-8" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLT822tXIKPXc7HXXaJtLSSVEfpRS4EyDic3HWVN01x5ovinmTJ1UrpuyXF9VBe-vBR7jTI67BoCLTlZDcE6Iq2cS1YoN9RSALV3TOiIZqbaa_mn50TNpC90gr2Rp3C8Bkwp9pfOpwNIyOJCXV7CrR9sL9ffmu3ysnQ6RAnP7JK94SuAaoRer-1txu9KdCK-bfbkqMGR7triPz7_GWHj0KXr91N7foI4KQSmQYi9uqh0fO7S9EqUbugv-su4DeQyC-exa2kRQVuVMx"/>
+<div class="absolute top-6 left-6 flex gap-2">
+<span class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest">TRL 9</span>
+<span class="bg-primary-container text-on-primary-container px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest">Flight Proven</span>
+</div>
+</div>
+<div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-3">
+<div class="technical-card rounded-lg aspect-square border-2 border-primary overflow-hidden">
+<img alt="High Gain X-Band Array antenna" class="w-full h-full object-contain p-8" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLT822tXIKPXc7HXXaJtLSSVEfpRS4EyDic3HWVN01x5ovinmTJ1UrpuyXF9VBe-vBR7jTI67BoCLTlZDcE6Iq2cS1YoN9RSALV3TOiIZqbaa_mn50TNpC90gr2Rp3C8Bkwp9pfOpwNIyOJCXV7CrR9sL9ffmu3ysnQ6RAnP7JK94SuAaoRer-1txu9KdCK-bfbkqMGR7triPz7_GWHj0KXr91N7foI4KQSmQYi9uqh0fO7S9EqUbugv-su4DeQyC-exa2kRQVuVMx"/>
+</div>
+<div class="technical-card rounded-lg aspect-square opacity-60 hover:opacity-100 transition-opacity overflow-hidden cursor-pointer">
+<img alt="High Gain X-Band Array antenna" class="w-full h-full object-contain p-8" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLT822tXIKPXc7HXXaJtLSSVEfpRS4EyDic3HWVN01x5ovinmTJ1UrpuyXF9VBe-vBR7jTI67BoCLTlZDcE6Iq2cS1YoN9RSALV3TOiIZqbaa_mn50TNpC90gr2Rp3C8Bkwp9pfOpwNIyOJCXV7CrR9sL9ffmu3ysnQ6RAnP7JK94SuAaoRer-1txu9KdCK-bfbkqMGR7triPz7_GWHj0KXr91N7foI4KQSmQYi9uqh0fO7S9EqUbugv-su4DeQyC-exa2kRQVuVMx"/>
+</div>
+<div class="technical-card rounded-lg aspect-square opacity-60 hover:opacity-100 transition-opacity overflow-hidden cursor-pointer">
+<img alt="High Gain X-Band Array antenna" class="w-full h-full object-contain p-8" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLT822tXIKPXc7HXXaJtLSSVEfpRS4EyDic3HWVN01x5ovinmTJ1UrpuyXF9VBe-vBR7jTI67BoCLTlZDcE6Iq2cS1YoN9RSALV3TOiIZqbaa_mn50TNpC90gr2Rp3C8Bkwp9pfOpwNIyOJCXV7CrR9sL9ffmu3ysnQ6RAnP7JK94SuAaoRer-1txu9KdCK-bfbkqMGR7triPz7_GWHj0KXr91N7foI4KQSmQYi9uqh0fO7S9EqUbugv-su4DeQyC-exa2kRQVuVMx"/>
+</div>
+<div class="technical-card rounded-lg aspect-square opacity-60 hover:opacity-100 transition-opacity overflow-hidden cursor-pointer">
+<img alt="High Gain X-Band Array antenna" class="w-full h-full object-contain p-8" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLT822tXIKPXc7HXXaJtLSSVEfpRS4EyDic3HWVN01x5ovinmTJ1UrpuyXF9VBe-vBR7jTI67BoCLTlZDcE6Iq2cS1YoN9RSALV3TOiIZqbaa_mn50TNpC90gr2Rp3C8Bkwp9pfOpwNIyOJCXV7CrR9sL9ffmu3ysnQ6RAnP7JK94SuAaoRer-1txu9KdCK-bfbkqMGR7triPz7_GWHj0KXr91N7foI4KQSmQYi9uqh0fO7S9EqUbugv-su4DeQyC-exa2kRQVuVMx"/>
+</div>
+<div class="technical-card rounded-lg aspect-square opacity-60 hover:opacity-100 transition-opacity overflow-hidden cursor-pointer flex items-center justify-center bg-surface-container">
+<span class="material-symbols-outlined text-on-surface-variant">videocam</span>
+</div>
+</div>
+</div>
+<!-- Product Info & Actions Section -->
+<div class="col-span-12 lg:col-span-5 flex flex-col gap-6">
+<div class="flex flex-col gap-2">
+<div class="flex items-center gap-2 text-on-primary-container font-label-mono text-xs">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">verified</span>
+                            ENDUROSAT S.A.
+                        </div>
+<h2 class="font-headline-lg text-headline-lg text-primary">High Gain X-Band Array</h2>
+<p class="text-on-surface-variant font-body-md max-w-md">High-performance X-Band antenna system designed for deep space communication, featuring a high-gain parabolic reflector and precision pointing capabilities for mission-critical data downlinks.</p>
+</div>
+<!-- Quick Metrics -->
+<div class="grid grid-cols-2 gap-4 py-4 border-y border-outline-variant">
+<div><span class="font-label-mono text-[10px] text-on-surface-variant uppercase">Antenna Gain</span><div class="flex items-baseline gap-1 mt-1"><span class="font-headline-md text-primary">34.0</span><span class="font-label-mono text-xs text-on-surface-variant">dBi</span></div></div>
+<div><span class="font-label-mono text-[10px] text-on-surface-variant uppercase">Frequency Range</span><div class="flex items-baseline gap-1 mt-1"><span class="font-headline-md text-primary">12-18</span><span class="font-label-mono text-xs text-on-surface-variant">GHz</span></div></div>
+</div>
+<!-- CTA Panel -->
+<div class="flex flex-col gap-3">
+<button class="w-full bg-primary text-on-primary h-14 rounded-lg font-button-text text-lg flex items-center justify-center gap-2 hover:opacity-90 transition-all active:scale-[0.98]">
+                            Request Official Quote
+                            <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<div class="grid grid-cols-2 gap-3">
+<button class="border border-primary text-primary h-12 rounded-lg font-button-text flex items-center justify-center gap-2 hover:bg-surface-container transition-all">
+<span class="material-symbols-outlined text-lg">info</span>
+                                Technical Info
+                            </button>
+<button class="border border-outline text-on-surface-variant h-12 rounded-lg font-button-text flex items-center justify-center gap-2 hover:bg-surface-container transition-all">
+<span class="material-symbols-outlined text-lg">chat</span>
+                                Ask Engineer
+                            </button>
+</div>
+</div>
+<!-- Downloads Section -->
+<div class="flex flex-col gap-3 mt-4">
+<h3 class="font-label-mono text-xs font-bold uppercase tracking-widest text-on-surface-variant px-1">Technical Artifacts</h3>
+<div class="flex flex-col border border-outline-variant rounded-lg divide-y divide-outline-variant">
+<div class="flex items-center justify-between p-4 hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-primary-container">architecture</span>
+<span class="text-sm font-medium">CAD Model (.step)</span>
+</div>
+<button class="text-on-primary-container hover:text-primary font-button-text text-xs uppercase">Request</button>
+</div>
+<div class="flex items-center justify-between p-4 hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-primary-container">description</span>
+<span class="text-sm font-medium">Detailed Datasheet</span>
+</div>
+<button class="text-on-primary-container hover:text-primary font-button-text text-xs uppercase">Request</button>
+</div>
+<div class="flex items-center justify-between p-4 hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-primary-container">menu_book</span>
+<span class="text-sm font-medium">Interface Control Document (ICD)</span>
+</div>
+<button class="text-on-primary-container hover:text-primary font-button-text text-xs uppercase">Request</button>
+</div>
+</div>
+</div>
+<!-- Integration/Export Section -->
+<div class="flex flex-col gap-3 mt-4">
+<h3 class="font-label-mono text-xs font-bold uppercase tracking-widest text-on-surface-variant px-1">Ecosystem Integration</h3>
+<div class="grid grid-cols-3 gap-2">
+<button class="flex flex-col items-center gap-2 p-3 border border-outline-variant rounded-lg hover:border-primary transition-all group">
+<div class="w-8 h-8 rounded bg-orange-100 flex items-center justify-center group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-orange-600 text-sm">vibration</span>
+</div>
+<span class="text-[10px] font-bold text-on-surface-variant">VALISPACE</span>
+</button>
+<button class="flex flex-col items-center gap-2 p-3 border border-outline-variant rounded-lg hover:border-primary transition-all group">
+<div class="w-8 h-8 rounded bg-blue-100 flex items-center justify-center group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-blue-600 text-sm">hub</span>
+</div>
+<span class="text-[10px] font-bold text-on-surface-variant">LYNAPSE</span>
+</button>
+<button class="flex flex-col items-center gap-2 p-3 border border-outline-variant rounded-lg hover:border-primary transition-all group">
+<div class="w-8 h-8 rounded bg-teal-100 flex items-center justify-center group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-teal-600 text-sm">explore</span>
+</div>
+<span class="text-[10px] font-bold text-on-surface-variant">360™ SPACE</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Detailed Content Tabs -->
+<section class="mt-16 border-t border-outline-variant pt-12">
+<div class="flex gap-6 md:gap-12 mb-8 border-b border-outline-variant overflow-x-auto scrollbar-hide">
+<button class="pb-4 border-b-2 border-primary font-headline-md text-primary text-base whitespace-nowrap">Overview</button>
+<button class="pb-4 border-b-2 border-transparent hover:text-primary transition-colors font-headline-md text-on-surface-variant text-base whitespace-nowrap">Detailed Specs</button>
+<button class="pb-4 border-b-2 border-transparent hover:text-primary transition-colors font-headline-md text-on-surface-variant text-base whitespace-nowrap">Heritage</button>
+<button class="pb-4 border-b-2 border-transparent hover:text-primary transition-colors font-headline-md text-on-surface-variant text-base whitespace-nowrap">Deployment Logic</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+<div class="flex flex-col gap-6"><h3 class="font-headline-md text-primary">Technical Description</h3><p class="font-body-md text-on-surface-variant leading-relaxed">The High Gain X-Band Array is a sophisticated aerospace antenna system engineered for long-range deep space communications. Utilizing a high-precision parabolic mesh reflector, it provides exceptional gain and narrow beamwidth, essential for maintaining high-bandwidth links with ground stations from interplanetary distances.</p><p class="font-body-md text-on-surface-variant leading-relaxed">The system includes an integrated low-noise amplifier and a robust dual-axis gimbal mechanism for precise pointing. Designed for the harsh radiation environments of deep space, the array features space-grade materials and thermal protection to ensure reliable operation over extended mission durations of 10+ years.</p></div>
+<div class="flex flex-col gap-6"><h3 class="font-headline-md text-primary">Primary Applications</h3><ul class="flex flex-col gap-4"><li class="flex items-start gap-3"><span class="material-symbols-outlined text-on-primary-container mt-1">check_circle</span><span class="font-body-md text-on-surface-variant">High-speed data downlink for deep space exploration missions</span></li><li class="flex items-start gap-3"><span class="material-symbols-outlined text-on-primary-container mt-1">check_circle</span><span class="font-body-md text-on-surface-variant">Inter-satellite links for high-altitude constellation networks</span></li><li class="flex items-start gap-3"><span class="material-symbols-outlined text-on-primary-container mt-1">check_circle</span><span class="font-body-md text-on-surface-variant">Lunar and Martian surface-to-orbit communication relays</span></li><li class="flex items-start gap-3"><span class="material-symbols-outlined text-on-primary-container mt-1">check_circle</span><span class="font-body-md text-on-surface-variant">Precision radio science and occultation experiments</span></li></ul></div>
+</div>
+<!-- Technical Table Section -->
+<div class="mt-16 bg-surface-container-low rounded-xl p-8 border border-outline-variant">
+<h3 class="font-headline-md text-primary mb-6">Key Performance Parameters</h3>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="border-b border-outline-variant text-[10px] font-label-mono text-on-surface-variant uppercase tracking-widest">
+<th class="pb-4 font-medium">Parameter</th>
+<th class="pb-4 font-medium">Value</th>
+<th class="pb-4 font-medium">Unit</th>
+<th class="pb-4 font-medium">Condition</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<tr class="group hover:bg-surface-container transition-colors"><td class="py-4 font-medium text-sm">Operating Frequency</td><td class="py-4 mono-data text-sm text-primary">12.5 - 18.0</td><td class="py-4 mono-data text-xs text-on-surface-variant">GHz</td><td class="py-4 text-xs text-on-surface-variant italic">X-Band / Ku-Band compatible</td></tr>
+<tr class="group hover:bg-surface-container transition-colors"><td class="py-4 font-medium text-sm">Peak Gain</td><td class="py-4 mono-data text-sm text-primary">34.2</td><td class="py-4 mono-data text-xs text-on-surface-variant">dBi</td><td class="py-4 text-xs text-on-surface-variant italic">At 15 GHz center frequency</td></tr>
+<tr class="group hover:bg-surface-container transition-colors">
+<td class="py-4 font-medium text-sm">Supply Voltage</td>
+<td class="py-4 mono-data text-sm text-primary">5.0</td>
+<td class="py-4 mono-data text-xs text-on-surface-variant">V</td>
+<td class="py-4 text-xs text-on-surface-variant italic">Nominal DC supply</td>
+</tr>
+<tr class="group hover:bg-surface-container transition-colors"><td class="py-4 font-medium text-sm">Mass (estimated)</td><td class="py-4 mono-data text-sm text-primary">1.2</td><td class="py-4 mono-data text-xs text-on-surface-variant">kg</td><td class="py-4 text-xs text-on-surface-variant italic">Including gimbal and LNA</td></tr>
+<tr class="group hover:bg-surface-container transition-colors">
+<td class="py-4 font-medium text-sm">Deployment Mechanism</td>
+<td class="py-4 text-sm text-primary" colspan="2">Burn-wire release</td>
+<td class="py-4 text-xs text-on-surface-variant italic">Redundant activation available</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<!-- Floating Chat Action -->
+<button class="fixed bottom-5 right-5 md:bottom-8 md:right-8 bg-[#0EA5E9] text-white px-4 md:px-6 py-3.5 md:py-4 rounded-full shadow-xl flex items-center gap-2 md:gap-3 font-button-text hover:scale-105 active:scale-95 transition-all z-40">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">chat_bubble</span>
+<span class="hidden sm:inline">Chat with an Expert</span>
+            </button>
+</div>
+</main>
+<footer class="lg:ml-64 bg-primary text-on-primary-fixed-variant p-margin-mobile md:p-margin-desktop border-t border-on-primary-fixed-variant">
+<div class="max-w-container-max mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+<div class="col-span-1">
+<h4 class="font-headline-md text-primary-fixed mb-4">GRAVLOC Terminal</h4>
+<p class="text-sm opacity-70 leading-relaxed">The unified interface for mission-critical aerospace procurement and technical data management.</p>
+</div>
+<div>
+<h5 class="font-label-mono text-[10px] uppercase mb-4 tracking-widest text-primary-fixed opacity-60">Directory</h5>
+<ul class="flex flex-col gap-2 text-sm">
+<li><a class="hover:text-primary-fixed" href="#">Product Explorer</a></li>
+<li><a class="hover:text-primary-fixed" href="#">Supplier Network</a></li>
+<li><a class="hover:text-primary-fixed" href="#">RFX Management</a></li>
+</ul>
+</div>
+<div>
+<h5 class="font-label-mono text-[10px] uppercase mb-4 tracking-widest text-primary-fixed opacity-60">Legal &amp; Compliance</h5>
+<ul class="flex flex-col gap-2 text-sm">
+<li><a class="hover:text-primary-fixed" href="#">ITAR/EAR Compliance</a></li>
+<li><a class="hover:text-primary-fixed" href="#">Privacy Framework</a></li>
+<li><a class="hover:text-primary-fixed" href="#">Terms of Service</a></li>
+</ul>
+</div>
+<div>
+<h5 class="font-label-mono text-[10px] uppercase mb-4 tracking-widest text-primary-fixed opacity-60">Connectivity</h5>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded bg-on-primary-fixed-variant flex items-center justify-center hover:bg-primary-fixed-dim transition-colors" href="#">
+<span class="material-symbols-outlined text-primary text-xl">rss_feed</span>
+</a>
+<a class="w-10 h-10 rounded bg-on-primary-fixed-variant flex items-center justify-center hover:bg-primary-fixed-dim transition-colors" href="#">
+<span class="material-symbols-outlined text-primary text-xl">share</span>
+</a>
+</div>
+</div>
+</div>
+<div class="max-w-container-max mx-auto mt-16 pt-8 border-t border-on-primary-fixed-variant flex flex-col sm:flex-row justify-between gap-2 text-[10px] font-label-mono uppercase tracking-widest opacity-40">
+<span>© 2024 GRAVLOC AEROSPACE SYSTEMS</span>
+<span>SECURE TERMINAL ID: GL-PX-9921-X</span>
+</div>
+</footer>
+<script>
+        // Micro-interaction for gallery images
+        document.querySelectorAll('.technical-card.cursor-pointer').forEach(item => {
+            item.addEventListener('click', function() {
+                const mainImg = document.querySelector('.lg\\:col-span-7 img');
+                const tempSrc = this.querySelector('img').src;
+                const tempAlt = this.querySelector('img').getAttribute('data-alt');
+                
+                // Swap main image
+                mainImg.src = tempSrc;
+                mainImg.setAttribute('data-alt', tempAlt);
+                
+                // Highlight selected
+                document.querySelectorAll('.technical-card').forEach(c => c.classList.remove('border-2', 'border-primary'));
+                this.classList.add('border-2', 'border-primary');
+                this.classList.remove('opacity-60');
+            });
+        });
+
+        // Search shortcut hint interaction
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
+                e.preventDefault();
+                document.querySelector('input').focus();
+            }
+        });
+
+        // Sidebar drawer (mobile/tablet)
+        const sideNav = document.getElementById('side-nav');
+        const sidebarOverlay = document.getElementById('sidebar-overlay');
+        const sidebarOpenBtn = document.getElementById('sidebar-open-btn');
+        const sidebarCloseBtn = document.getElementById('sidebar-close-btn');
+
+        function openSidebar() {
+            sideNav.classList.remove('-translate-x-full');
+            sidebarOverlay.classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
+            if (sidebarOpenBtn) sidebarOpenBtn.setAttribute('aria-expanded', 'true');
+        }
+        function closeSidebar() {
+            sideNav.classList.add('-translate-x-full');
+            sidebarOverlay.classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+            if (sidebarOpenBtn) sidebarOpenBtn.setAttribute('aria-expanded', 'false');
+        }
+        if (sidebarOpenBtn) sidebarOpenBtn.addEventListener('click', openSidebar);
+        if (sidebarCloseBtn) sidebarCloseBtn.addEventListener('click', closeSidebar);
+        if (sidebarOverlay) sidebarOverlay.addEventListener('click', closeSidebar);
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeSidebar();
+        });
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 1024) {
+                sidebarOverlay.classList.add('hidden');
+                document.body.classList.remove('overflow-hidden');
+            }
+        });
+
+        // Mobile search bar toggle
+        const mobileSearchToggle = document.getElementById('mobile-search-toggle');
+        const mobileSearchBar = document.getElementById('mobile-search-bar');
+        if (mobileSearchToggle && mobileSearchBar) {
+            mobileSearchToggle.addEventListener('click', () => {
+                mobileSearchBar.classList.toggle('hidden');
+            });
+        }
+    </script>
+
+</body></html>

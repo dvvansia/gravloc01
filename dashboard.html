@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>GRAVLOC | Aerospace Procurement Portal</title>
+     <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7385FFBGNM"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-7385FFBGNM');
+    </script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#00050e",
+                        "primary-container": "#0b1f33",
+                        "on-primary-container": "#7587a0",
+                        "secondary": "#545f73",
+                        "surface": "#fbf9fb",
+                        "surface-container": "#efedef",
+                        "surface-container-low": "#f5f3f5",
+                        "surface-container-highest": "#e4e2e4",
+                        "outline": "#74777d",
+                        "outline-variant": "#c4c6cd",
+                        "on-surface": "#1b1c1d",
+                        "on-surface-variant": "#44474c",
+                        "accent-cyan": "#38BDF8",
+                        "error": "#ba1a1a",
+                        "success": "#0f973d"
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.25rem",
+                        lg: "0.5rem",
+                        xl: "0.75rem",
+                        full: "9999px"
+                    },
+                    spacing: {
+                        "margin-desktop": "48px",
+                        "gutter": "24px",
+                        "margin-mobile": "16px",
+                        "container-max": "1440px"
+                    },
+                    fontFamily: {
+                        "headline-lg": ["Space Grotesk"],
+                        "headline-md": ["Space Grotesk"],
+                        "label-mono": ["JetBrains Mono"],
+                        "body-md": ["Inter"],
+                        "body-sm": ["Inter"]
+                    },
+                    fontSize: {
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "label-mono": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fbf9fb;
+            color: #1b1c1d;
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #0b1f33 0%, #38BDF8 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .stat-card {
+            transition: all 0.2s ease;
+            border: 1px solid #e4e2e4;
+        }
+        .stat-card:hover {
+            border-color: #0b1f33;
+            box-shadow: 0 8px 24px rgba(11, 31, 51, 0.06);
+            transform: translateY(-2px);
+        }
+        .rfq-card {
+            border-left: 3px solid #38BDF8;
+        }
+        .rfq-card.pending {
+            border-left-color: #f59e0b;
+        }
+        .rfq-card.quoted {
+            border-left-color: #0f973d;
+        }
+        .rfq-card.completed {
+            border-left-color: #6366f1;
+        }
+        .component-card {
+            transition: all 0.2s ease;
+        }
+        .component-card:hover {
+            border-color: #0b1f33;
+            box-shadow: 0 8px 24px rgba(11, 31, 51, 0.08);
+        }
+        .search-container:focus-within {
+            border-color: #0b1f33;
+            box-shadow: 0 0 0 3px rgba(11, 31, 51, 0.08);
+        }
+        .badge-heritage {
+            background: #0b1f33;
+            color: white;
+            font-size: 8px;
+            letter-spacing: 0.05em;
+        }
+        .badge-itar {
+            background: #ba1a1a;
+            color: white;
+            font-size: 8px;
+            letter-spacing: 0.05em;
+        }
+        .badge-trl {
+            background: #e4e2e4;
+            color: #1b1c1d;
+            font-size: 8px;
+            letter-spacing: 0.05em;
+        }
+        .filter-chip {
+            transition: all 0.15s ease;
+            cursor: pointer;
+        }
+        .filter-chip:hover {
+            background: #0b1f33;
+            color: white;
+        }
+        .filter-chip.active {
+            background: #0b1f33;
+            color: white;
+        }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(16px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .slide-up {
+            animation: slideUp 0.4s ease forwards;
+        }
+    </style>
+</head>
+<body>
+
+<!-- ============================================================ -->
+<!-- HEADER -->
+<!-- ============================================================ -->
+<header class="sticky top-0 z-50 bg-surface border-b border-outline-variant h-20 w-full">
+    <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop flex justify-between items-center h-full">
+        <div class="flex items-center gap-3 md:gap-8">
+            <button id="mobile-menu-btn" class="lg:hidden -ml-2 p-2 text-on-background" aria-label="Open menu">
+                <span class="material-symbols-outlined">menu</span>
+            </button>
+            <a href="index.html" class="flex items-center gap-2">
+                <span class="font-headline-lg text-headline-md font-bold tracking-tighter text-primary">GRAVLOC</span>
+            </a>
+            <nav class="hidden lg:flex items-center gap-6">
+    <a class="font-label-mono text-label-mono text-primary font-bold border-b-2 border-primary pb-1" href="dashboard.html">Catalogue</a>
+    <a class="font-label-mono text-label-mono text-on-surface-variant hover:text-primary transition-colors pb-1" href="#">Compare</a>
+    <a class="font-label-mono text-label-mono text-on-surface-variant hover:text-primary transition-colors pb-1" href="rfq.html">RFQs</a>
+    <a class="font-label-mono text-label-mono text-on-surface-variant hover:text-primary transition-colors pb-1" href="suppliers.html">Suppliers</a>
+    <a class="font-label-mono text-label-mono text-on-surface-variant hover:text-primary transition-colors pb-1" href="#">My AVL</a>
+</nav>
+        </div>
+        <div class="flex items-center gap-3 md:gap-6">
+            <div class="hidden lg:flex items-center gap-2 px-3 py-1.5 bg-surface-container-low rounded border border-outline-variant">
+                <span class="material-symbols-outlined text-[18px]">search</span>
+                <span class="font-label-mono text-label-mono text-on-surface-variant">Quick Search</span>
+                <span class="font-label-mono text-[10px] bg-outline-variant px-1 rounded">⌘K</span>
+            </div>
+            <div class="flex items-center gap-3 pl-0 md:pl-4 md:border-l border-outline-variant">
+                <div class="hidden sm:flex flex-col items-end">
+                    <span class="font-label-mono text-label-mono text-on-surface font-bold">A. Vance</span>
+                    <span class="font-label-mono text-[10px] text-on-surface-variant">Procurement Officer</span>
+                </div>
+                <div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-white">
+                    <span class="material-symbols-outlined">account_circle</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden lg:hidden bg-surface border-b border-outline-variant shadow-lg">
+    <nav class="flex flex-col px-4 py-4 gap-1">
+        <a class="font-label-mono text-label-mono text-primary font-bold px-3 py-3 rounded hover:bg-surface-container" href="dashboard.html">Catalogue</a>
+        <a class="font-label-mono text-label-mono text-on-surface-variant px-3 py-3 rounded hover:bg-surface-container hover:text-primary" href="#">Compare</a>
+        <a class="font-label-mono text-label-mono text-on-surface-variant px-3 py-3 rounded hover:bg-surface-container hover:text-primary" href="rfq.html">RFQs</a>
+        <a class="font-label-mono text-label-mono text-on-surface-variant px-3 py-3 rounded hover:bg-surface-container hover:text-primary" href="suppliers.html">Suppliers</a>
+        <a class="font-label-mono text-label-mono text-on-surface-variant px-3 py-3 rounded hover:bg-surface-container hover:text-primary" href="#">My AVL</a>
+    </nav>
+</div>
+</header>
+
+<!-- ============================================================ -->
+<!-- HERO / SEARCH -->
+<!-- ============================================================ -->
+<section class="bg-gradient-to-br from-primary-container/5 via-surface to-surface py-8 md:py-20 border-b border-outline-variant">
+    <div class="max-w-container-max mx-auto px-4 md:px-margin-desktop">
+        <div class="text-center max-w-4xl mx-auto">
+            <div class="inline-flex items-center gap-2 px-3 py-1 bg-secondary-container text-on-secondary-container rounded-full mb-3 md:mb-4">
+                <span class="material-symbols-outlined text-[12px] md:text-[16px]" style="font-variation-settings: 'FILL' 1;">rocket_launch</span>
+                <span class="font-label-mono text-[8px] md:text-[10px] uppercase tracking-widest">5,000+ Components • 20+ Founding Suppliers</span>
+            </div>
+            <h1 class="font-display-lg text-2xl md:text-display-lg text-primary mb-2 md:mb-4 leading-tight">
+                Discover, Compare &amp; Source <br class="hidden sm:inline"><span class="gradient-text">Space-Grade Components</span>
+            </h1>
+            <p class="font-body-lg text-sm md:text-body-lg text-on-surface-variant mb-6 md:mb-8 max-w-2xl mx-auto px-2 leading-relaxed">
+                AI-powered search and comparison for <br class="sm:hidden">radiation-hardened parts, flight-proven hardware, <br class="sm:hidden">and mission-critical systems.
+            </p>
+            <div class="max-w-3xl mx-auto">
+                <div class="search-container flex items-center bg-white border border-outline-variant rounded-lg overflow-hidden h-12 md:h-16 px-3 md:px-6 gap-2 md:gap-4">
+                    <span class="material-symbols-outlined text-primary text-lg md:text-xl">search</span>
+                    <input class="flex-1 min-w-0 border-none focus:ring-0 font-body-md text-sm md:text-body-md text-primary placeholder:text-outline placeholder:text-xs md:placeholder:text-sm" placeholder="Search by part number, manufacturer..." type="text">
+                    <button class="bg-primary-container text-white px-3 md:px-6 h-8 md:h-10 rounded font-button-text text-[10px] md:text-sm hover:bg-primary transition-all flex items-center gap-1 md:gap-2 flex-shrink-0">
+                        <span class="hidden sm:inline">Search</span>
+                        <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                    </button>
+                </div>
+                <!-- Mission Context Filter -->
+                <div class="flex flex-wrap items-center justify-center gap-1.5 md:gap-2 mt-3 md:mt-4">
+                    <span class="font-label-mono text-[8px] md:text-[10px] text-on-surface-variant uppercase tracking-wider">Mission:</span>
+                    <span class="filter-chip active px-2 md:px-3 py-0.5 md:py-1 rounded-full border border-outline-variant bg-primary-container text-white text-[8px] md:text-[10px] font-label-mono">All</span>
+                    <span class="filter-chip px-2 md:px-3 py-0.5 md:py-1 rounded-full border border-outline-variant text-[8px] md:text-[10px] font-label-mono">LEO</span>
+                    <span class="filter-chip px-2 md:px-3 py-0.5 md:py-1 rounded-full border border-outline-variant text-[8px] md:text-[10px] font-label-mono">GEO</span>
+                    <span class="filter-chip px-2 md:px-3 py-0.5 md:py-1 rounded-full border border-outline-variant text-[8px] md:text-[10px] font-label-mono">Deep Space</span>
+                    <span class="filter-chip px-2 md:px-3 py-0.5 md:py-1 rounded-full border border-outline-variant text-[8px] md:text-[10px] font-label-mono">Launch</span>
+                    <span class="filter-chip px-2 md:px-3 py-0.5 md:py-1 rounded-full border border-outline-variant text-[8px] md:text-[10px] font-label-mono">Cubesat</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<<!-- ============================================================ -->
+<!-- CATEGORIES GRID -->
+<!-- ============================================================ -->
+<section class="py-10 md:py-20 bg-white">
+    <div class="max-w-container-max mx-auto px-4 md:px-margin-desktop">
+        <div class="flex flex-col sm:flex-row sm:justify-between sm:items-end gap-4 mb-6 md:mb-10">
+            <div>
+                <h2 class="font-headline-lg text-xl md:text-headline-lg text-primary">Component Categories</h2>
+                <p class="font-body-md text-sm md:text-body-md text-on-surface-variant mt-1">Browse the marketplace by specialized hardware domains.</p>
+            </div>
+            <a class="font-label-mono text-[10px] md:text-label-mono text-primary flex items-center gap-2 group" href="#">
+                VIEW ALL
+                <span class="material-symbols-outlined transition-transform group-hover:translate-x-1 text-sm">chevron_right</span>
+            </a>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-gutter">
+            <!-- Category Card 1 -->
+            <div class="technical-card border border-outline-variant bg-surface-bright p-4 md:p-8 rounded flex flex-col justify-between h-32 md:h-48 cursor-pointer hover:border-primary-container transition-all">
+                <span class="material-symbols-outlined text-primary text-2xl md:text-3xl">wb_sunny</span>
+                <div>
+                    <h3 class="font-headline-md text-sm md:text-headline-md text-primary">Solar Panels</h3>
+                    <p class="font-label-mono text-[8px] md:text-label-mono text-on-surface-variant mt-0.5 md:mt-1">124</p>
+                </div>
+            </div>
+            <!-- Category Card 2 -->
+            <div class="technical-card border border-outline-variant bg-surface-bright p-4 md:p-8 rounded flex flex-col justify-between h-32 md:h-48 cursor-pointer hover:border-primary-container transition-all">
+                <span class="material-symbols-outlined text-primary text-2xl md:text-3xl">battery_charging_full</span>
+                <div>
+                    <h3 class="font-headline-md text-sm md:text-headline-md text-primary">Batteries</h3>
+                    <p class="font-label-mono text-[8px] md:text-label-mono text-on-surface-variant mt-0.5 md:mt-1">86</p>
+                </div>
+            </div>
+            <!-- Category Card 3 -->
+            <div class="technical-card border border-outline-variant bg-surface-bright p-4 md:p-8 rounded flex flex-col justify-between h-32 md:h-48 cursor-pointer hover:border-primary-container transition-all">
+                <span class="material-symbols-outlined text-primary text-2xl md:text-3xl">star</span>
+                <div>
+                    <h3 class="font-headline-md text-sm md:text-headline-md text-primary">Star Trackers</h3>
+                    <p class="font-label-mono text-[8px] md:text-label-mono text-on-surface-variant mt-0.5 md:mt-1">42</p>
+                </div>
+            </div>
+            <!-- Category Card 4 -->
+            <a href="antennas.html" class="block technical-card border border-outline-variant bg-surface-bright p-4 md:p-8 rounded flex flex-col justify-between h-32 md:h-48 cursor-pointer hover:border-primary-container transition-all">
+                <span class="material-symbols-outlined text-primary text-2xl md:text-3xl">amend</span>
+                <div>
+                    <h3 class="font-headline-md text-sm md:text-headline-md text-primary">Antennas</h3>
+                    <p class="font-label-mono text-[8px] md:text-label-mono text-on-surface-variant mt-0.5 md:mt-1">215</p>
+                </div>
+            </a>
+            <!-- Category Card 5 -->
+            <div class="technical-card border border-outline-variant bg-surface-bright p-4 md:p-8 rounded flex flex-col justify-between h-32 md:h-48 cursor-pointer hover:border-primary-container transition-all">
+                <span class="material-symbols-outlined text-primary text-2xl md:text-3xl">settings_voice</span>
+                <div>
+                    <h3 class="font-headline-md text-sm md:text-headline-md text-primary">Reaction Wheels</h3>
+                    <p class="font-label-mono text-[8px] md:text-label-mono text-on-surface-variant mt-0.5 md:mt-1">37</p>
+                </div>
+            </div>
+            <!-- Category Card 6 -->
+            <div class="technical-card border border-outline-variant bg-surface-bright p-4 md:p-8 rounded flex flex-col justify-between h-32 md:h-48 cursor-pointer hover:border-primary-container transition-all">
+                <span class="material-symbols-outlined text-primary text-2xl md:text-3xl">rocket</span>
+                <div>
+                    <h3 class="font-headline-md text-sm md:text-headline-md text-primary">Thrusters</h3>
+                    <p class="font-label-mono text-[8px] md:text-label-mono text-on-surface-variant mt-0.5 md:mt-1">94</p>
+                </div>
+            </div>
+            <!-- Category Card 7 -->
+            <div class="technical-card border border-outline-variant bg-surface-bright p-4 md:p-8 rounded flex flex-col justify-between h-32 md:h-48 cursor-pointer hover:border-primary-container transition-all">
+                <span class="material-symbols-outlined text-primary text-2xl md:text-3xl">speed</span>
+                <div>
+                    <h3 class="font-headline-md text-sm md:text-headline-md text-primary">Propulsion Systems</h3>
+                    <p class="font-label-mono text-[8px] md:text-label-mono text-on-surface-variant mt-0.5 md:mt-1">56</p>
+                </div>
+            </div>
+            <!-- Category Card 8 -->
+            <div class="technical-card border border-outline-variant bg-surface-bright p-4 md:p-8 rounded flex flex-col justify-between h-32 md:h-48 cursor-pointer hover:border-primary-container transition-all">
+                <span class="material-symbols-outlined text-primary text-2xl md:text-3xl">thermostat</span>
+                <div>
+                    <h3 class="font-headline-md text-sm md:text-headline-md text-primary">Thermal Control</h3>
+                    <p class="font-label-mono text-[8px] md:text-label-mono text-on-surface-variant mt-0.5 md:mt-1">112</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- MAIN GRID: FEATURED COMPONENTS + RFQ ACTIVITY -->
+<!-- ============================================================ -->
+<section class="py-12 md:py-16 bg-surface">
+    <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+            <!-- ========================================================== -->
+            <!-- LEFT: COMPONENT COMPARISON CARDS -->
+            <!-- ========================================================== -->
+            <div class="lg:col-span-2 space-y-6">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div>
+                        <h2 class="font-headline-lg text-headline-lg text-primary">Featured Components</h2>
+                        <p class="font-body-sm text-body-sm text-on-surface-variant">Flight-proven parts from verified suppliers</p>
+                    </div>
+                    <button class="font-label-mono text-label-mono text-primary flex items-center gap-2 hover:gap-3 transition-all">
+                        View All
+                        <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                    </button>
+                </div>
+
+                <!-- Component Card 1 -->
+                <div class="component-card bg-white border border-outline-variant rounded-xl p-6 hover:shadow-lg transition-all">
+                    <div class="flex flex-col md:flex-row gap-6">
+                        <div class="md:w-1/4 h-32 md:h-auto bg-surface-container rounded-lg overflow-hidden flex items-center justify-center border border-outline-variant">
+                            <span class="material-symbols-outlined text-5xl text-primary-container/40">memory</span>
+                        </div>
+                        <div class="flex-1 space-y-3">
+                            <div class="flex flex-wrap items-center gap-2">
+                                <span class="font-headline-md text-headline-md text-primary">LX-400 Rad-Hard FPGA</span>
+                                <span class="badge-heritage px-2 py-0.5 rounded uppercase">Flight Heritage</span>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="badge-trl px-2 py-0.5 rounded uppercase">TRL 9</span>
+                                <span class="badge-itar px-2 py-0.5 rounded uppercase">ITAR</span>
+                                <span class="bg-surface-container px-2 py-0.5 rounded text-[10px] font-label-mono">TID: 100 krad</span>
+                                <span class="bg-surface-container px-2 py-0.5 rounded text-[10px] font-label-mono">-55°C to 125°C</span>
+                            </div>
+                            <div class="flex flex-wrap items-center justify-between gap-4">
+                                <div>
+                                    <span class="font-body-sm text-body-sm text-on-surface-variant">Supplier:</span>
+                                    <span class="font-body-sm text-body-sm font-semibold">NexGen Systems</span>
+                                    <span class="text-success text-[12px] font-label-mono ml-2">● Verified</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <span class="font-label-mono text-[10px] text-on-surface-variant">MOQ: 5</span>
+                                    <span class="font-label-mono text-[10px] text-on-surface-variant">Lead: 8-10 wks</span>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap gap-3 pt-2 border-t border-outline-variant/30">
+                                <button class="text-primary-container font-label-mono text-[10px] flex items-center gap-1 hover:underline">
+                                    <span class="material-symbols-outlined text-sm">compare</span> Compare
+                                </button>
+                                <button class="text-primary-container font-label-mono text-[10px] flex items-center gap-1 hover:underline">
+                                    <span class="material-symbols-outlined text-sm">description</span> Datasheet
+                                </button>
+                                <button class="bg-primary-container text-white px-4 py-1.5 rounded font-label-mono text-[10px] hover:bg-primary transition-colors ml-auto flex items-center gap-1">
+                                    Request Quote
+                                    <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Component Card 2 -->
+                <div class="component-card bg-white border border-outline-variant rounded-xl p-6 hover:shadow-lg transition-all">
+                    <div class="flex flex-col md:flex-row gap-6">
+                        <div class="md:w-1/4 h-32 md:h-auto bg-surface-container rounded-lg overflow-hidden flex items-center justify-center border border-outline-variant">
+                            <span class="material-symbols-outlined text-5xl text-primary-container/40">wb_sunny</span>
+                        </div>
+                        <div class="flex-1 space-y-3">
+                            <div class="flex flex-wrap items-center gap-2">
+                                <span class="font-headline-md text-headline-md text-primary">HE-300 Solar Panel Array</span>
+                                <span class="badge-heritage px-2 py-0.5 rounded uppercase">Heritage</span>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="badge-trl px-2 py-0.5 rounded uppercase">TRL 8</span>
+                                <span class="bg-surface-container px-2 py-0.5 rounded text-[10px] font-label-mono">Efficiency: 32.5%</span>
+                                <span class="bg-surface-container px-2 py-0.5 rounded text-[10px] font-label-mono">Rad-Hard Cells</span>
+                            </div>
+                            <div class="flex flex-wrap items-center justify-between gap-4">
+                                <div>
+                                    <span class="font-body-sm text-body-sm text-on-surface-variant">Supplier:</span>
+                                    <span class="font-body-sm text-body-sm font-semibold">Helios Power</span>
+                                    <span class="text-success text-[12px] font-label-mono ml-2">● Verified</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <span class="font-label-mono text-[10px] text-on-surface-variant">MOQ: 10</span>
+                                    <span class="font-label-mono text-[10px] text-on-surface-variant">Lead: 12-14 wks</span>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap gap-3 pt-2 border-t border-outline-variant/30">
+                                <button class="text-primary-container font-label-mono text-[10px] flex items-center gap-1 hover:underline">
+                                    <span class="material-symbols-outlined text-sm">compare</span> Compare
+                                </button>
+                                <button class="text-primary-container font-label-mono text-[10px] flex items-center gap-1 hover:underline">
+                                    <span class="material-symbols-outlined text-sm">description</span> Datasheet
+                                </button>
+                                <button class="bg-primary-container text-white px-4 py-1.5 rounded font-label-mono text-[10px] hover:bg-primary transition-colors ml-auto flex items-center gap-1">
+                                    Request Quote
+                                    <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Component Card 3 -->
+                <div class="component-card bg-white border border-outline-variant rounded-xl p-6 hover:shadow-lg transition-all">
+                    <div class="flex flex-col md:flex-row gap-6">
+                        <div class="md:w-1/4 h-32 md:h-auto bg-surface-container rounded-lg overflow-hidden flex items-center justify-center border border-outline-variant">
+                            <span class="material-symbols-outlined text-5xl text-primary-container/40">star</span>
+                        </div>
+                        <div class="flex-1 space-y-3">
+                            <div class="flex flex-wrap items-center gap-2">
+                                <span class="font-headline-md text-headline-md text-primary">A-90 Star Tracker</span>
+                                <span class="badge-heritage px-2 py-0.5 rounded uppercase">Flight Proven</span>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="badge-trl px-2 py-0.5 rounded uppercase">TRL 9</span>
+                                <span class="badge-itar px-2 py-0.5 rounded uppercase">ITAR</span>
+                                <span class="bg-surface-container px-2 py-0.5 rounded text-[10px] font-label-mono">Accuracy: 1.5 arcsec</span>
+                            </div>
+                            <div class="flex flex-wrap items-center justify-between gap-4">
+                                <div>
+                                    <span class="font-body-sm text-body-sm text-on-surface-variant">Supplier:</span>
+                                    <span class="font-body-sm text-body-sm font-semibold">Orion Optics</span>
+                                    <span class="text-success text-[12px] font-label-mono ml-2">● Verified</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <span class="font-label-mono text-[10px] text-on-surface-variant">MOQ: 1</span>
+                                    <span class="font-label-mono text-[10px] text-on-surface-variant">Lead: 6-8 wks</span>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap gap-3 pt-2 border-t border-outline-variant/30">
+                                <button class="text-primary-container font-label-mono text-[10px] flex items-center gap-1 hover:underline">
+                                    <span class="material-symbols-outlined text-sm">compare</span> Compare
+                                </button>
+                                <button class="text-primary-container font-label-mono text-[10px] flex items-center gap-1 hover:underline">
+                                    <span class="material-symbols-outlined text-sm">description</span> Datasheet
+                                </button>
+                                <button class="bg-primary-container text-white px-4 py-1.5 rounded font-label-mono text-[10px] hover:bg-primary transition-colors ml-auto flex items-center gap-1">
+                                    Request Quote
+                                    <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========================================================== -->
+            <!-- RIGHT: RFQ ACTIVITY + QUICK ACTIONS -->
+            <!-- ========================================================== -->
+            <div class="space-y-6">
+
+                <!-- RFQ Activity Feed -->
+                <div class="bg-white border border-outline-variant rounded-xl p-6">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="font-headline-md text-headline-md text-primary">RFQ Activity</h3>
+                        <span class="font-label-mono text-[10px] text-on-surface-variant flex items-center gap-1">
+                            <span class="w-2 h-2 rounded-full bg-success animate-pulse"></span>
+                            Live
+                        </span>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="rfq-card pending pl-4 py-3 bg-surface-container-low rounded-r-lg">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <span class="font-label-mono text-[10px] text-on-surface-variant">#RFQ-2481</span>
+                                    <p class="font-body-sm text-body-sm font-medium">LX-400 FPGA • 25 units</p>
+                                    <p class="font-body-sm text-[12px] text-on-surface-variant">NexGen Systems • Quoting</p>
+                                </div>
+                                <span class="badge-trl px-2 py-0.5 rounded uppercase text-[9px]">Pending</span>
+                            </div>
+                            <div class="mt-2 flex items-center gap-3">
+                                <span class="font-label-mono text-[9px] text-on-surface-variant">Submitted: 2h ago</span>
+                                <span class="font-label-mono text-[9px] text-accent-cyan">3 suppliers</span>
+                            </div>
+                        </div>
+
+                        <div class="rfq-card quoted pl-4 py-3 bg-surface-container-low rounded-r-lg">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <span class="font-label-mono text-[10px] text-on-surface-variant">#RFQ-2479</span>
+                                    <p class="font-body-sm text-body-sm font-medium">HE-300 Solar Array • 50 units</p>
+                                    <p class="font-body-sm text-[12px] text-on-surface-variant">Helios Power • Quote Received</p>
+                                </div>
+                                <span class="badge-heritage px-2 py-0.5 rounded uppercase text-[9px]">Quoted</span>
+                            </div>
+                            <div class="mt-2 flex items-center gap-3">
+                                <span class="font-label-mono text-[9px] text-on-surface-variant">Quote: €142,500</span>
+                                <span class="font-label-mono text-[9px] text-success">Lead: 12 wks</span>
+                                <button class="font-label-mono text-[9px] text-primary underline">Review</button>
+                            </div>
+                        </div>
+
+                        <div class="rfq-card pending pl-4 py-3 bg-surface-container-low rounded-r-lg">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <span class="font-label-mono text-[10px] text-on-surface-variant">#RFQ-2477</span>
+                                    <p class="font-body-sm text-body-sm font-medium">A-90 Star Tracker • 3 units</p>
+                                    <p class="font-body-sm text-[12px] text-on-surface-variant">Orion Optics • Awaiting Quote</p>
+                                </div>
+                                <span class="badge-trl px-2 py-0.5 rounded uppercase text-[9px]">Pending</span>
+                            </div>
+                            <div class="mt-2 flex items-center gap-3">
+                                <span class="font-label-mono text-[9px] text-on-surface-variant">Submitted: 1d ago</span>
+                                <span class="font-label-mono text-[9px] text-accent-cyan">2 suppliers</span>
+                            </div>
+                        </div>
+
+                        <a href="rfq.html" class="w-full text-center font-label-mono text-[10px] text-primary hover:underline pt-2 border-t border-outline-variant/30 flex items-center justify-center gap-1">
+    View All RFQs
+    <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="bg-primary-container text-white rounded-xl p-6">
+                    <h3 class="font-headline-md text-headline-md text-white mb-2">Need a Part?</h3>
+                    <p class="font-body-sm text-body-sm text-on-primary-container mb-4">Submit an RFQ and get quotes from verified suppliers in 48h.</p>
+                    <button class="bg-white text-primary-container px-6 py-2.5 rounded-lg font-button-text hover:scale-[1.02] transition-transform w-full flex items-center justify-center gap-2">
+                        <span class="material-symbols-outlined">add</span>
+                        Create New RFQ
+                    </button>
+                    <div class="mt-4 pt-4 border-t border-white/10 text-center">
+                        <span class="font-label-mono text-[10px] text-on-primary-container">Average response time: 6.2 hours</span>
+                    </div>
+                </div>
+
+                <!-- AVL Quick Access -->
+                <div class="bg-white border border-outline-variant rounded-xl p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="font-headline-md text-headline-md text-primary">My AVL</h3>
+                        <span class="font-label-mono text-[10px] text-on-surface-variant">12 suppliers</span>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-surface-container px-3 py-1 rounded-full text-[10px] font-label-mono">NexGen Systems</span>
+                        <span class="bg-surface-container px-3 py-1 rounded-full text-[10px] font-label-mono">Helios Power</span>
+                        <span class="bg-surface-container px-3 py-1 rounded-full text-[10px] font-label-mono">Orion Optics</span>
+                        <span class="bg-surface-container px-3 py-1 rounded-full text-[10px] font-label-mono">+9 more</span>
+                    </div>
+                    <button class="mt-4 font-label-mono text-[10px] text-primary hover:underline flex items-center gap-1">
+                        Manage AVL
+                        <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- AI INTELLIGENCE LAYER — COMING SOON -->
+<!-- ============================================================ -->
+<section class="py-12 bg-surface">
+    <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+        <div class="bg-gradient-to-r from-primary-container/5 to-accent-cyan/5 border border-accent-cyan/20 rounded-2xl p-8 md:p-12">
+            <div class="flex flex-col md:flex-row items-center gap-8">
+                <div class="flex-1">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 bg-accent-cyan/10 rounded-full mb-4">
+                        <span class="material-symbols-outlined text-accent-cyan text-[16px]" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+                        <span class="font-label-mono text-[10px] uppercase tracking-widest text-accent-cyan">Phase 2 — Coming Soon</span>
+                    </div>
+                    <h2 class="font-headline-lg text-headline-lg text-primary">AI-Powered Datasheet Intelligence</h2>
+                    <p class="font-body-md text-body-md text-on-surface-variant mt-3 max-w-lg">
+                        We're building an engine that reads supplier datasheets — automatically extracting TID ratings, temperature ranges, pinouts, and heritage data into a unified, searchable format.
+                    </p>
+                    <div class="flex flex-wrap items-center gap-3 mt-6">
+                        <span class="bg-white border border-outline-variant px-4 py-2 rounded-full text-[12px] font-label-mono flex items-center gap-2">
+                            <span class="material-symbols-outlined text-accent-cyan text-sm">check_circle</span>
+                            No more manual data entry
+                        </span>
+                        <span class="bg-white border border-outline-variant px-4 py-2 rounded-full text-[12px] font-label-mono flex items-center gap-2">
+                            <span class="material-symbols-outlined text-accent-cyan text-sm">check_circle</span>
+                            Standardized across all suppliers
+                        </span>
+                        <span class="bg-white border border-outline-variant px-4 py-2 rounded-full text-[12px] font-label-mono flex items-center gap-2">
+                            <span class="material-symbols-outlined text-accent-cyan text-sm">check_circle</span>
+                            Traceable &amp; verifiable
+                        </span>
+                    </div>
+                    <div class="mt-6 flex items-center gap-4 text-on-surface-variant/70">
+                        <span class="material-symbols-outlined text-accent-cyan">construction</span>
+                        <span class="font-body-sm text-body-sm">In Active Development </span>
+                    </div>
+                </div>
+                <div class="flex-shrink-0 bg-white border border-outline-variant rounded-xl p-6 text-center min-w-[160px]">
+                    <div class="flex items-center justify-center gap-1 text-accent-cyan">
+                        <span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+                    </div>
+                    <p class="font-headline-md text-headline-md text-primary mt-2">Phase 2</p>
+                    <p class="font-label-mono text-[10px] text-on-surface-variant">Intelligence Layer</p>
+                    <div class="mt-3 inline-block px-3 py-1 bg-accent-cyan/10 rounded-full text-[9px] font-label-mono text-accent-cyan">Q4 2026</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-[#303032] border-t border-[#c4c6cd]">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-16 grid grid-cols-12 gap-gutter">
+<div class="col-span-12 lg:col-span-4 space-y-6">
+<img alt="GRAVLOC" class="h-8 w-auto object-contain brightness-0 invert" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjsSv4799yK9-MHKyNleAkZOa3IMtVQT45gksNHw-YsdPIOqU1Vfp1SqEhWgSU3u-yOxEhD6TrtdwHvz0eK83tyTLBSfZLgWYc6fhUz2Cj5mrjr06Wx2SjvCiYDRaxyANgtg62ZGYxg-UDDY2GFZJCWzU7RWgr6fCfeXs6vRWrjUsHIuGtd8HoXKQzfwNwREHNjxdsqNssM-tegcA3zDsWZ_TQZSeU4cxXONIOPhnzPqNGYIlhSfNWjtWZgp4ExFYvIrDxCzrFdVfa">
+<p class="text-[#f2f0f2] font-body-sm max-w-xs opacity-70">
+                    © 2026 GRAVLOC. All rights reserved. Precision procurement for mission-critical systems.
+                </p>
+<div class="flex gap-4"><a href="#" class="text-[#f2f0f2] opacity-70 hover:opacity-100 transition-opacity" aria-label="Facebook"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a><a href="#" class="text-[#f2f0f2] opacity-70 hover:opacity-100 transition-opacity" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg></a><a href="#" class="text-[#f2f0f2] opacity-70 hover:opacity-100 transition-opacity" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg></a></div>
+</div>
+<div class="col-span-6 lg:col-span-2 space-y-4">
+<h4 class="font-label-mono text-xs text-white uppercase tracking-widest">Platform</h4>
+<ul class="space-y-2">
+<li class=""><a class="text-[#c4c6cd] hover:text-white transition-colors text-body-sm" href="dashboard.html">Product Sitemap</a></li>
+<li class=""><a class="text-[#c4c6cd] hover:text-white transition-colors text-body-sm" href="#">Solutions</a></li>
+<li class=""><a class="text-[#c4c6cd] hover:text-white transition-colors text-body-sm" href="#">Search Engines</a></li>
+</ul>
+</div>
+<div class="col-span-6 lg:col-span-2 space-y-4">
+<h4 class="font-label-mono text-xs text-white uppercase tracking-widest">Compliance</h4>
+<ul class="space-y-2">
+<li class=""><a class="text-[#c4c6cd] hover:text-white transition-colors text-body-sm" href="#">Compliance &amp; ITAR</a></li>
+<li class=""><a class="text-[#c4c6cd] hover:text-white transition-colors text-body-sm" href="#">Quality Assurance</a></li>
+<li class=""><a class="text-[#c4c6cd] hover:text-white transition-colors text-body-sm" href="#">Security Policy</a></li>
+</ul>
+</div>
+<div class="col-span-6 lg:col-span-2 space-y-4">
+<h4 class="font-label-mono text-xs text-white uppercase tracking-widest">Company</h4>
+<ul class="space-y-2">
+<li class=""><a class="text-[#c4c6cd] hover:text-white transition-colors text-body-sm" href="#">About Us</a></li>
+<li class=""><a class="text-[#c4c6cd] hover:text-white transition-colors text-body-sm" href="#">Privacy Policy</a></li>
+<li class=""><a class="text-[#c4c6cd] hover:text-white transition-colors text-body-sm" href="#">Terms of Service</a></li>
+</ul>
+</div>
+<div class="col-span-6 lg:col-span-2 space-y-4">
+<h4 class="font-label-mono text-xs text-white uppercase tracking-widest">Support</h4>
+<ul class="space-y-2">
+<li class=""><a class="text-[#c4c6cd] hover:text-white transition-colors text-body-sm" href="#">Contact Support</a></li>
+<li class=""><a class="text-[#c4c6cd] hover:text-white transition-colors text-body-sm" href="#">Documentation</a></li>
+<li class=""><a class="text-[#c4c6cd] hover:text-white transition-colors text-body-sm" href="suppliers.html">Supplier Portal</a></li>
+</ul>
+</div>
+</div>
+</footer>
+
+<!-- ============================================================ -->
+<!-- SCRIPTS -->
+<!-- ============================================================ -->
+<script>
+    // Mobile menu toggle
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    if (menuBtn && mobileMenu) {
+        menuBtn.addEventListener('click', () => {
+            const isOpen = !mobileMenu.classList.contains('hidden');
+            mobileMenu.classList.toggle('hidden');
+            menuBtn.setAttribute('aria-expanded', String(!isOpen));
+            menuBtn.querySelector('.material-symbols-outlined').textContent = isOpen ? 'menu' : 'close';
+        });
+    }
+
+    // Search bar focus
+    const searchInput = document.querySelector('input[type="text"]');
+    const searchContainer = document.querySelector('.search-container');
+    if (searchInput && searchContainer) {
+        searchInput.addEventListener('focus', () => {
+            searchContainer.classList.add('ring-2', 'ring-primary-container', 'ring-opacity-20');
+        });
+        searchInput.addEventListener('blur', () => {
+            searchContainer.classList.remove('ring-2', 'ring-primary-container', 'ring-opacity-20');
+        });
+    }
+
+    // Keyboard shortcut: Cmd+K / Ctrl+K
+    document.addEventListener('keydown', (e) => {
+        if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+            e.preventDefault();
+            if (searchInput) searchInput.focus();
+        }
+    });
+
+    // Filter chips toggle
+    document.querySelectorAll('.filter-chip').forEach(chip => {
+        chip.addEventListener('click', function() {
+            document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active', 'bg-primary-container', 'text-white'));
+            this.classList.add('active', 'bg-primary-container', 'text-white');
+        });
+    });
+</script>
+
+</body>
+</html>

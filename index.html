@@ -1,0 +1,738 @@
+<!DOCTYPE html><html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>GRAVLOC | Space-Grade Procurement Engine</title>
+
+ <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7385FFBGNM"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-7385FFBGNM');
+    </script>
+    
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;family=JetBrains+Mono:wght@100..900&amp;family=Space+Grotesk:wght@100..900&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-surface": "#303032",
+                        "tertiary-fixed-dim": "#e7bf97",
+                        "error": "#ba1a1a",
+                        "on-error": "#ffffff",
+                        "on-background": "#1b1c1d",
+                        "surface-container": "#efedef",
+                        "inverse-on-surface": "#f2f0f2",
+                        "secondary": "#545f73",
+                        "surface-bright": "#fbf9fb",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed": "#d8e3fb",
+                        "tertiary": "#090300",
+                        "tertiary-container": "#2e1901",
+                        "on-primary": "#ffffff",
+                        "on-surface": "#1b1c1d",
+                        "tertiary-fixed": "#ffdcbb",
+                        "surface-container-lowest": "#ffffff",
+                        "surface": "#fbf9fb",
+                        "secondary-fixed-dim": "#bcc7de",
+                        "outline-variant": "#c4c6cd",
+                        "primary-container": "#0b1f33",
+                        "primary-fixed-dim": "#b5c8e3",
+                        "on-primary-container": "#7587a0",
+                        "inverse-primary": "#b5c8e3",
+                        "on-tertiary": "#ffffff",
+                        "background": "#fbf9fb",
+                        "surface-variant": "#e4e2e4",
+                        "on-secondary-container": "#586377",
+                        "on-error-container": "#93000a",
+                        "on-primary-fixed-variant": "#36485e",
+                        "secondary-container": "#d5e0f8",
+                        "on-surface-variant": "#44474c",
+                        "surface-dim": "#dbd9db",
+                        "error-container": "#ffdad6",
+                        "primary": "#00050e",
+                        "surface-container-highest": "#e4e2e4",
+                        "primary-fixed": "#d1e4ff",
+                        "on-primary-fixed": "#081d30",
+                        "surface-container-low": "#f5f3f5",
+                        "on-secondary-fixed": "#111c2d",
+                        "on-tertiary-fixed-variant": "#5d4123",
+                        "surface-container-high": "#e9e7e9",
+                        "on-secondary-fixed-variant": "#3c475a",
+                        "on-tertiary-fixed": "#2b1700",
+                        "surface-tint": "#4e6077",
+                        "outline": "#74777d",
+                        "on-tertiary-container": "#a27f5b",
+                        "accent-cyan": "#38BDF8"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "48px",
+                        "gutter": "24px",
+                        "unit": "4px",
+                        "margin-mobile": "16px",
+                        "container-max": "1440px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Space Grotesk"],
+                        "headline-md": ["Space Grotesk"],
+                        "label-mono": ["JetBrains Mono"],
+                        "body-md": ["Inter"],
+                        "body-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "label-mono": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 24px;
+        }
+        @media (max-width: 1023px) {
+            .bento-grid { grid-template-columns: repeat(6, 1fr); }
+        }
+        @media (max-width: 639px) {
+            .bento-grid { grid-template-columns: repeat(1, 1fr); }
+        }
+        .technical-line {
+            background-image: linear-gradient(90deg, #E2E8F0 50%, transparent 50%);
+            background-size: 8px 1px;
+            height: 1px;
+            width: 100%;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(226, 232, 240, 0.5);
+        }
+        .shimmer {
+            background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.1), transparent);
+            background-size: 200% 100%;
+            animation: shimmer 2s infinite;
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md">
+<!-- Header (Shared Component: TopNavBar) -->
+<header class="docked full-width top-0 sticky z-50 bg-surface border-b border-outline-variant h-20 w-full">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop flex justify-between items-center h-full">
+<div class="flex items-center gap-4 md:gap-8">
+<button id="mobile-menu-btn" class="lg:hidden -ml-2 p-2 text-on-background" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<img alt="GRAVLOC" class="h-7 md:h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjsSv4799yK9-MHKyNleAkZOa3IMtVQT45gksNHw-YsdPIOqU1Vfp1SqEhWgSU3u-yOxEhD6TrtdwHvz0eK83tyTLBSfZLgWYc6fhUz2Cj5mrjr06Wx2SjvCiYDRaxyANgtg62ZGYxg-UDDY2GFZJCWzU7RWgr6fCfeXs6vRWrjUsHIuGtd8HoXKQzfwNwREHNjxdsqNssM-tegcA3zDsWZ_TQZSeU4cxXONIOPhnzPqNGYIlhSfNWjtWZgp4ExFYvIrDxCzrFdVfa">
+<nav class="hidden lg:flex items-center gap-6">
+<a class="font-label-mono text-label-mono text-primary font-bold border-b-2 border-primary pb-1" href="#">Home</a>
+<a class="font-label-mono text-label-mono text-on-surface-variant hover:text-primary transition-colors duration-200" href="dashboard.html">Platform</a>
+<a class="font-label-mono text-label-mono text-on-surface-variant hover:text-primary transition-colors duration-200" href="suppliers.html">Suppliers</a>
+<a class="font-label-mono text-label-mono text-on-surface-variant hover:text-primary transition-colors duration-200" href="dashboard.html">Explore Catalogue</a>
+
+</nav>
+</div>
+<div class="flex items-center gap-2 md:gap-4">
+    <a href="login.html" class="hidden sm:inline-block font-label-mono text-label-mono text-on-surface-variant px-2 md:px-4 py-2 hover:text-primary">Log In</a>
+    <a href="signup.html" class="bg-primary-container text-white px-4 md:px-6 py-2 md:py-2.5 rounded-lg font-label-mono text-label-mono hover:opacity-90 transition-opacity inline-block">Sign Up</a>
+</div>
+</div>
+<!-- Mobile Menu Panel -->
+<div id="mobile-menu" class="hidden lg:hidden absolute top-full left-0 w-full bg-surface border-b border-outline-variant shadow-lg">
+<nav class="flex flex-col px-margin-mobile py-4 gap-1">
+<a class="font-label-mono text-label-mono text-primary font-bold px-3 py-3 rounded hover:bg-surface-container" href="#">Home</a>
+<a class="font-label-mono text-label-mono text-on-surface-variant px-3 py-3 rounded hover:bg-surface-container hover:text-primary transition-colors" href="dashboard.html">Platform</a>
+<a class="font-label-mono text-label-mono text-on-surface-variant px-3 py-3 rounded hover:bg-surface-container hover:text-primary transition-colors" href="suppliers.html">Suppliers</a>
+<a class="font-label-mono text-label-mono text-on-surface-variant px-3 py-3 rounded hover:bg-surface-container hover:text-primary transition-colors" href="dashboard.html">Explore Catalogue</a>
+<div class="border-t border-outline-variant mt-2 pt-3 sm:hidden">
+<a href="login.html" class="font-label-mono text-label-mono text-on-surface-variant px-3 py-3 rounded hover:bg-surface-container hover:text-primary block">Log In</a>
+</div>
+</nav>
+</div>
+</header>
+<!-- Hero Section -->
+<section class="relative overflow-hidden pt-10 pb-16 lg:pt-32 lg:pb-24">
+<div class="absolute inset-0 z-0 pointer-events-none opacity-20">
+
+</div>
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop relative z-10">
+<div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+<div class="space-y-6 md:space-y-8">
+<div class="inline-flex items-center gap-2 px-3 py-1 bg-secondary-container text-on-secondary-container rounded-full">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: &quot;FILL&quot; 1;">stars</span>
+<span class="font-label-mono text-[10px] uppercase tracking-widest">New Space Economy</span>
+</div>
+<h1 class="font-headline-lg text-[32px] leading-[1.15] md:text-display-lg max-w-xl text-primary-container">
+                        Source space-grade components with confidence
+                    </h1>
+<p class="font-body-md text-body-lg text-on-surface-variant max-w-lg">
+                        Discover, compare, and verify mission-critical hardware from trusted global suppliers. The procurement engine for the next frontier.
+                    </p>
+<div class="flex flex-wrap gap-4 pt-4">
+<button class="bg-primary-container text-white px-6 md:px-8 py-3.5 md:py-4 rounded-lg font-headline-md text-body-md flex items-center gap-2 hover:scale-[1.02] transition-transform">
+    Join Early Access
+    <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<a href="dashboard.html" class="border border-primary-container text-primary-container px-6 md:px-8 py-3.5 md:py-4 rounded-lg font-headline-md text-body-md hover:bg-surface-container-low transition-colors inline-block">
+    Explore Platform
+</a>
+</div>
+</div>
+<div class="relative group">
+<div class="absolute -inset-4 bg-accent-cyan opacity-10 blur-3xl rounded-full group-hover:opacity-20 transition-opacity"></div>
+<div class="relative glass-card rounded-xl overflow-hidden shadow-2xl border border-outline-variant">
+<img class="w-full aspect-[4/3] object-cover" data-alt="A high-fidelity software dashboard showing an aerospace components search interface. Dark theme UI with spectral graphs of radiation hardening, mechanical schematics of reaction wheels, and verified supplier badges. The interface looks professional, modern, and data-dense with cyan and navy accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAdkjUZXsi6AzhPHIb3YVvjPX3fC_ObjCSJEdtfQuuIfM09_r7T2F7Gg2oo2UZWOW0j7uvHwtfmSaIjnUbzofr5hodu9MtIjVaVNdrEiiql7O0-oSIyYYn_4wVn9QK_IwErUiwjh8I9JetVHzTScJgXzID_tg6dDmfSImyTL2oauo97mEpEdmlTs6Zzea0XMlqBojIK2KzsAEIkazzpcG3bqXhMWCDDEvRFwOfjaHd2GAguP-AeRVEKRgxRCGu-Yt81yYp7jo7mC_6q">
+<div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Trust Bar -->
+<section class="bg-primary-container py-12">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+<div class="text-center space-y-1">
+<div class="font-headline-md text-white text-headline-lg">80%</div>
+<div class="font-label-mono text-on-primary-container uppercase text-[10px]">Faster Sourcing</div>
+</div>
+<div class="text-center space-y-1">
+<div class="font-headline-md text-white text-headline-lg">5,000+</div>
+<div class="font-label-mono text-on-primary-container uppercase text-[10px]">Components</div>
+</div>
+<div class="text-center space-y-1">
+<div class="font-headline-md text-white text-headline-lg">20+</div>
+<div class="font-label-mono text-on-primary-container uppercase text-[10px]">Founding Suppliers</div>
+</div>
+<div class="text-center space-y-1">
+<div class="font-headline-md text-white text-headline-lg">8+</div>
+<div class="font-label-mono text-on-primary-container uppercase text-[10px]">spec filters</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Feature Grid -->
+<section class="py-24 bg-surface-container-lowest">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="text-center max-w-2xl mx-auto mb-16 space-y-4">
+<h2 class="font-headline-lg text-headline-lg text-primary-container">Built for Mission Criticality</h2>
+<p class="text-on-surface-variant">Precision tools designed for the complex requirements of aerospace engineering and procurement.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Feature 1 -->
+<div class="p-8 border border-outline-variant bg-white rounded-lg hover:border-accent-cyan transition-all group">
+<div class="w-12 h-12 bg-surface-container rounded-lg flex items-center justify-center mb-6 group-hover:bg-primary-container group-hover:text-white transition-colors">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+</div>
+<h3 class="font-headline-md text-body-lg mb-3">Space-Native Search</h3>
+<p class="text-body-sm text-on-surface-variant">Search by part number, radiation tolerance (TID), or heritage mission history.</p>
+</div>
+<!-- Feature 2 -->
+<div class="p-8 border border-outline-variant bg-white rounded-lg hover:border-accent-cyan transition-all group">
+<div class="w-12 h-12 bg-surface-container rounded-lg flex items-center justify-center mb-6 group-hover:bg-primary-container group-hover:text-white transition-colors">
+<span class="material-symbols-outlined" data-icon="filter_list">filter_list</span>
+</div>
+<h3 class="font-headline-md text-body-lg mb-3">Mission Context Filters</h3>
+<p class="text-body-sm text-on-surface-variant">Filter by Orbit Type (LEO, GEO), Mass Range, and SWaP-C constraints.</p>
+</div>
+<!-- Feature 3 -->
+<div class="p-8 border border-outline-variant bg-white rounded-lg hover:border-accent-cyan transition-all group">
+<div class="w-12 h-12 bg-surface-container rounded-lg flex items-center justify-center mb-6 group-hover:bg-primary-container group-hover:text-white transition-colors">
+<span class="material-symbols-outlined" data-icon="compare">compare</span>
+</div>
+<h3 class="font-headline-md text-body-lg mb-3">Side-by-Side Comparison</h3>
+<p class="text-body-sm text-on-surface-variant">Analyze technical specifications across multiple vendors in a unified view.</p>
+</div>
+<!-- Feature 4 -->
+<div class="p-8 border border-outline-variant bg-white rounded-lg hover:border-accent-cyan transition-all group">
+<div class="w-12 h-12 bg-surface-container rounded-lg flex items-center justify-center mb-6 group-hover:bg-primary-container group-hover:text-white transition-colors">
+<span class="material-symbols-outlined" data-icon="verified">verified</span>
+</div>
+<h3 class="font-headline-md text-body-lg mb-3">Verified Supplier Profiles</h3>
+<p class="text-body-sm text-on-surface-variant">Access AS9100 certified vendors with vetted flight heritage and ITAR status.</p>
+</div>
+<!-- Feature 5 -->
+<div class="p-8 border border-outline-variant bg-white rounded-lg hover:border-accent-cyan transition-all group">
+<div class="w-12 h-12 bg-surface-container rounded-lg flex items-center justify-center mb-6 group-hover:bg-primary-container group-hover:text-white transition-colors">
+<span class="material-symbols-outlined" data-icon="encrypted">encrypted</span>
+</div>
+<h3 class="font-headline-md text-body-lg mb-3">Secure Document Vault</h3>
+<p class="text-body-sm text-on-surface-variant">Centralized access to data sheets, CAD models, and compliance certificates.</p>
+</div>
+<!-- Feature 6 -->
+<div class="p-8 border border-outline-variant bg-white rounded-lg hover:border-accent-cyan transition-all group">
+<div class="w-12 h-12 bg-surface-container rounded-lg flex items-center justify-center mb-6 group-hover:bg-primary-container group-hover:text-white transition-colors">
+<span class="material-symbols-outlined" data-icon="task_alt">task_alt</span>
+</div>
+<h3 class="font-headline-md text-body-lg mb-3">Structured RFQ Workflow</h3>
+<p class="text-body-sm text-on-surface-variant">Standardized requests ensure faster quotes and accurate technical compliance.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Audience Solutions -->
+
+<!-- Product Showcase -->
+
+<!-- RFQ Preview -->
+
+ <!-- Roadmap Section -->
+<section class="py-24 bg-surface-container">
+    <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+        <div class="text-center max-w-2xl mx-auto mb-16 space-y-4">
+            <h2 class="font-headline-lg text-headline-lg text-primary-container">Phased Development Approach</h2>
+            <p class="text-on-surface-variant">Building in public with a clear execution path.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+ <!-- Phase 0 Card - ADD the "Current" badge -->
+<div class="bg-white p-8 rounded-xl border border-accent-cyan shadow-lg relative">
+    <div class="absolute -top-3 right-4 bg-accent-cyan text-white text-[10px] font-label-mono px-3 py-1 rounded-full">Current</div>
+    <div class="text-accent-cyan font-label-mono text-xs uppercase tracking-widest">Phase 0</div>
+    <h3 class="font-headline-md text-headline-md mt-2 mb-3">Foundation</h3>
+    <ul class="space-y-2 text-body-sm text-on-surface-variant">
+        <li>• 5,000+ component catalogue</li>
+        <li>• 20 founding supplier partners</li>
+        <li>• Core search &amp; filtering</li>
+    </ul>
+    <div class="mt-4 inline-block px-3 py-1 bg-surface-container rounded-full text-[10px] font-label-mono">Months 1-2</div>
+</div>
+
+<!-- Phase 1 Card - REMOVE the "Current" badge -->
+<div class="bg-white p-8 rounded-xl border border-outline-variant relative">
+    <!-- Remove the absolute div with "Current" badge -->
+    <div class="text-accent-cyan font-label-mono text-xs uppercase tracking-widest">Phase 1</div>
+    <h3 class="font-headline-md text-headline-md mt-2 mb-3">MVP Launch</h3>
+    <ul class="space-y-2 text-body-sm text-on-surface-variant">
+        <li>• Public search &amp; catalogue</li>
+        <li>• RFQ workflow with NDA</li>
+        <li>• Buyer workspace &amp; AVL</li>
+    </ul>
+    <div class="mt-4 inline-block px-3 py-1 bg-surface-container rounded-full text-[10px] font-label-mono">Months 3-6</div>
+</div>  
+            <div class="bg-white p-8 rounded-xl border border-outline-variant">
+                <div class="text-accent-cyan font-label-mono text-xs uppercase tracking-widest">Phase 2</div>
+                <h3 class="font-headline-md text-headline-md mt-2 mb-3">Intelligence Layer</h3>
+                <ul class="space-y-2 text-body-sm text-on-surface-variant">
+                    <li>• AI recommendation engine</li>
+                    <li>• Supplier performance scorecard</li>
+                    <li>• Automated verification</li>
+                </ul>
+                <div class="mt-4 inline-block px-3 py-1 bg-surface-container rounded-full text-[10px] font-label-mono">Months 7-12</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials -->
+<section class="py-24 bg-surface-container-lowest overflow-hidden">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="flex flex-col md:flex-row gap-12 items-center">
+<div class="md:w-1/3">
+<h2 class="font-headline-lg text-headline-lg text-primary-container">Trusted by industry leaders</h2>
+<p class="text-on-surface-variant mt-4">Accelerating missions from cubesats to deep-space probes.</p>
+</div>
+<div class="md:w-2/3">
+    
+    <!-- Slider with arrows outside -->
+    <div class="relative flex items-center gap-2 md:gap-4">
+        
+        <!-- Left Arrow - OUTSIDE the card -->
+        <button id="testimonial-prev" class="flex-shrink-0 bg-white hover:bg-surface-container shadow-lg rounded-full w-10 h-10 flex items-center justify-center border border-outline-variant transition-all hover:scale-105 focus:outline-none" aria-label="Previous testimonial">
+            <span class="material-symbols-outlined text-on-surface-variant">chevron_left</span>
+        </button>
+
+        <!-- Testimonial Slider Container -->
+        <div class="relative overflow-hidden flex-1">
+            <div id="testimonial-slider" class="flex transition-transform duration-700 ease-in-out" style="transform: translateX(0%);">
+                
+                <!-- Testimonial 1: Lars -->
+                <div class="min-w-full px-1">
+                    <div class="bg-white p-6 md:p-8 rounded-xl border border-outline-variant">
+                        <div class="flex gap-1 text-accent-cyan mb-4">
+                            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                        </div>
+                        <p class="italic text-on-surface-variant mb-6 text-body-sm md:text-body-md">"The evidence across 100+ interviews shows a clear, quantified problem: current matching is inefficient, visibility is fragmented, and existing tools fail to deliver."</p>
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center font-headline-md text-accent-cyan">LK</div>
+                            <div>
+                                <div class="font-headline-md text-body-md">Lars K.</div>
+                                <div class="font-label-mono text-[10px] uppercase text-on-surface-variant">Polaris / ASTRAIT</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2: Marco -->
+                <div class="min-w-full px-1">
+                    <div class="bg-white p-6 md:p-8 rounded-xl border border-outline-variant">
+                        <div class="flex gap-1 text-accent-cyan mb-4">
+                            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                        </div>
+                        <p class="italic text-on-surface-variant mb-6 text-body-sm md:text-body-md">"Comparison between suppliers is difficult because buyers need to look at multiple factors: pricing, certificates, MOQ, trust, reviews, and delivery speed. A tool like this would be very helpful."</p>
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center font-headline-md text-accent-cyan">MW</div>
+                            <div>
+                                <div class="font-headline-md text-body-md">Marco W.</div>
+                                <div class="font-label-mono text-[10px] uppercase text-on-surface-variant">TUM WARR</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Right Arrow - OUTSIDE the card -->
+        <button id="testimonial-next" class="flex-shrink-0 bg-white hover:bg-surface-container shadow-lg rounded-full w-10 h-10 flex items-center justify-center border border-outline-variant transition-all hover:scale-105 focus:outline-none" aria-label="Next testimonial">
+            <span class="material-symbols-outlined text-on-surface-variant">chevron_right</span>
+        </button>
+    </div>
+
+    <!-- Dot Indicators -->
+    <div class="flex justify-center gap-2 mt-6">
+        <button class="w-2.5 h-2.5 rounded-full bg-accent-cyan transition-all duration-300" data-index="0" aria-label="Show testimonial 1"></button>
+        <button class="w-2.5 h-2.5 rounded-full bg-outline-variant/50 transition-all duration-300" data-index="1" aria-label="Show testimonial 2"></button>
+    </div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Early Access CTA -->
+<section class="py-24 bg-primary-container">
+    <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop text-center">
+        <h2 class="font-headline-lg text-headline-lg text-white">Ready to transform your component sourcing?</h2>
+        <p class="text-on-primary-container mt-4 max-w-lg mx-auto">Join the waitlist for early access. Be the first to use GRAVLOC when we launch.</p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center mt-8">
+            <input type="email" name="email" placeholder="Your work email" class="px-6 py-3.5 rounded-lg bg-white/10 border border-white/20 text-white placeholder:text-on-primary-container/70 focus:outline-none focus:border-accent-cyan min-w-[280px]">
+            <button class="bg-white text-primary-container px-8 py-3.5 rounded-lg font-headline-md text-body-md hover:scale-[1.02] transition-transform">
+                Get Early Access
+            </button>
+        </div>
+        <p class="text-on-primary-container/60 text-body-sm mt-4">No spam. Unsubscribe anytime.</p>
+    </div>
+</section>
+
+<!-- Footer (Shared Component) -->
+<footer class="bg-inverse-surface dark:bg-surface-container-lowest border-t border-outline-variant">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-16 grid grid-cols-12 gap-gutter">
+<div class="col-span-12 lg:col-span-4 space-y-6">
+<img alt="GRAVLOC" class="h-8 w-auto object-contain brightness-0 invert" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjsSv4799yK9-MHKyNleAkZOa3IMtVQT45gksNHw-YsdPIOqU1Vfp1SqEhWgSU3u-yOxEhD6TrtdwHvz0eK83tyTLBSfZLgWYc6fhUz2Cj5mrjr06Wx2SjvCiYDRaxyANgtg62ZGYxg-UDDY2GFZJCWzU7RWgr6fCfeXs6vRWrjUsHIuGtd8HoXKQzfwNwREHNjxdsqNssM-tegcA3zDsWZ_TQZSeU4cxXONIOPhnzPqNGYIlhSfNWjtWZgp4ExFYvIrDxCzrFdVfa">
+<p class="text-inverse-on-surface font-body-sm max-w-xs opacity-70">
+                    © 2026 GRAVLOC. All rights reserved. Precision procurement for mission-critical systems.
+                </p>
+<div class="flex gap-4"><a href="#" class="text-inverse-on-surface opacity-70 hover:opacity-100 transition-opacity" aria-label="Facebook"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a><a href="#" class="text-inverse-on-surface opacity-70 hover:opacity-100 transition-opacity" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg></a><a href="#" class="text-inverse-on-surface opacity-70 hover:opacity-100 transition-opacity" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg></a></div>
+</div>
+<div class="col-span-6 lg:col-span-2 space-y-4">
+<h4 class="font-label-mono text-xs text-white uppercase tracking-widest">Platform</h4>
+<ul class="space-y-2">
+<li class=""><a class="text-outline-variant hover:text-white transition-colors text-body-sm" href="dashboard.html">Product Sitemap</a></li>
+<li class=""><a class="text-outline-variant hover:text-white transition-colors text-body-sm" href="#">Solutions</a></li>
+<li class=""><a class="text-outline-variant hover:text-white transition-colors text-body-sm" href="#">Search Engines</a></li>
+</ul>
+</div>
+<div class="col-span-6 lg:col-span-2 space-y-4">
+<h4 class="font-label-mono text-xs text-white uppercase tracking-widest">Compliance</h4>
+<ul class="space-y-2">
+<li class=""><a class="text-outline-variant hover:text-white transition-colors text-body-sm" href="#">Compliance &amp; ITAR</a></li>
+<li class=""><a class="text-outline-variant hover:text-white transition-colors text-body-sm" href="#">Quality Assurance</a></li>
+<li class=""><a class="text-outline-variant hover:text-white transition-colors text-body-sm" href="#">Security Policy</a></li>
+</ul>
+</div>
+<div class="col-span-6 lg:col-span-2 space-y-4">
+<h4 class="font-label-mono text-xs text-white uppercase tracking-widest">Company</h4>
+<ul class="space-y-2">
+<li class=""><a class="text-outline-variant hover:text-white transition-colors text-body-sm" href="#">About Us</a></li>
+<li class=""><a class="text-outline-variant hover:text-white transition-colors text-body-sm" href="#">Privacy Policy</a></li>
+<li class=""><a class="text-outline-variant hover:text-white transition-colors text-body-sm" href="#">Terms of Service</a></li>
+</ul>
+</div>
+<div class="col-span-6 lg:col-span-2 space-y-4">
+<h4 class="font-label-mono text-xs text-white uppercase tracking-widest">Support</h4>
+<ul class="space-y-2">
+<li class=""><a class="text-outline-variant hover:text-white transition-colors text-body-sm" href="#">Contact Support</a></li>
+<li class=""><a class="text-outline-variant hover:text-white transition-colors text-body-sm" href="#">Documentation</a></li>
+<li class=""><a class="text-outline-variant hover:text-white transition-colors text-body-sm" href="suppliers.html">Supplier Portal</a></li>
+</ul>
+</div>
+</div>
+</footer>
+<script>
+        // Mobile menu toggle
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        if (menuBtn && mobileMenu) {
+            menuBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const isOpen = !mobileMenu.classList.contains('hidden');
+                mobileMenu.classList.toggle('hidden');
+                this.setAttribute('aria-expanded', String(!isOpen));
+                const icon = this.querySelector('.material-symbols-outlined');
+                if (icon) {
+                    icon.textContent = isOpen ? 'menu' : 'close';
+                }
+        });
+    }
+    </script>
+<script>
+        const tabData = [
+            {
+                title: "Rapid Prototyping with Verified Data",
+                tag: "Mission Planning",
+                desc: "Stop digging through outdated PDFs. Engineers can access real-time specifications, STEP files, and radiation test reports instantly. Our filters help you find parts that actually meet your SWaP-C and mission-life requirements.",
+                bullets: ["Instant access to CAD models and Interface Control Documents (ICDs)", "Historical performance data and flight heritage logs"]
+            },
+            {
+                title: "Streamlined Compliance and Sourcing",
+                tag: "Supply Chain",
+                desc: "Ensure every part in your BOM is ITAR/EAR compliant without manual spreadsheets. Automate the RFQ process and manage multi-vendor relationships through a single secure portal.",
+                bullets: ["Automated ITAR/EAR screening", "Unified RFP/RFQ management system"]
+            },
+            {
+                title: "Scale Your Space Business Faster",
+                tag: "Execution",
+                desc: "Move from design to orbit in record time. Startup CTOs can leverage our procurement engine to source heritage components without the overhead of a massive procurement team.",
+                bullets: ["Vetted supplier network with heritage ratings", "Budget tracking and component lead-time predictions"]
+            },
+            {
+                title: "Connect with High-Value Customers",
+                tag: "Growth",
+                desc: "List your components where the industry's top engineers are looking. Get discovered based on your technical specs and reliability, not just marketing budget.",
+                bullets: ["Qualified leads through structured RFQs", "Analytics on component search trends and market demand"]
+            }
+        ];
+
+        function switchTab(index) {
+            const container = document.getElementById('tab-content');
+            const btns = document.querySelectorAll('.tab-btn');
+            
+            // Update buttons
+            btns.forEach((btn, i) => {
+                if(i === index) {
+                    btn.classList.add('bg-primary-container', 'text-white');
+                    btn.classList.remove('border-outline-variant', 'text-on-surface-variant');
+                } else {
+                    btn.classList.remove('bg-primary-container', 'text-white');
+                    btn.classList.add('border-outline-variant', 'text-on-surface-variant');
+                }
+            });
+
+            // Update content
+            const data = tabData[index];
+            container.innerHTML = `
+                <div class="tab-pane space-y-6 opacity-0 translate-y-2 transition-all duration-300" id="current-pane">
+                    <span class="font-label-mono text-accent-cyan uppercase tracking-tighter">${data.tag}</span>
+                    <h3 class="font-headline-lg text-headline-lg">${data.title}</h3>
+                    <p class="text-body-md text-on-surface-variant leading-relaxed">${data.desc}</p>
+                    <ul class="space-y-3">
+                        ${data.bullets.map(b => `
+                            <li class="flex items-center gap-3 text-body-sm text-on-surface">
+                                <span class="material-symbols-outlined text-accent-cyan">check_circle</span>
+                                ${b}
+                            </li>
+                        `).join('')}
+                    </ul>
+                </div>
+            `;
+            
+            setTimeout(() => {
+                document.getElementById('current-pane').classList.remove('opacity-0', 'translate-y-2');
+            }, 10);
+        }
+    </script>
+<script>
+    // Testimonial Auto-Slide with Arrows & Swipe Support
+    (function() {
+        const slider = document.getElementById('testimonial-slider');
+        const dots = document.querySelectorAll('[data-index]');
+        const prevBtn = document.getElementById('testimonial-prev');
+        const nextBtn = document.getElementById('testimonial-next');
+        let currentIndex = 0;
+        const totalSlides = 2;
+        let interval;
+        let startX = 0;
+        let isDragging = false;
+
+        function goToSlide(index) {
+            if (index < 0) index = totalSlides - 1;
+            if (index >= totalSlides) index = 0;
+            currentIndex = index;
+            slider.style.transform = 'translateX(-' + (index * 100) + '%)';
+            
+            // Update dots
+            dots.forEach((dot, i) => {
+                if (i === index) {
+                    dot.classList.remove('bg-outline-variant/50');
+                    dot.classList.add('bg-accent-cyan');
+                } else {
+                    dot.classList.remove('bg-accent-cyan');
+                    dot.classList.add('bg-outline-variant/50');
+                }
+            });
+        }
+
+        function nextSlide() {
+            goToSlide(currentIndex + 1);
+        }
+
+        function prevSlide() {
+            goToSlide(currentIndex - 1);
+        }
+
+        function startAutoSlide() {
+            stopAutoSlide();
+            interval = setInterval(nextSlide, 6000);
+        }
+
+        function stopAutoSlide() {
+            clearInterval(interval);
+        }
+
+        // Arrow buttons
+        if (prevBtn) {
+            prevBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                stopAutoSlide();
+                prevSlide();
+                startAutoSlide();
+            });
+        }
+
+        if (nextBtn) {
+            nextBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                stopAutoSlide();
+                nextSlide();
+                startAutoSlide();
+            });
+        }
+
+        // Dot indicators
+        dots.forEach((dot) => {
+            dot.addEventListener('click', function() {
+                const index = parseInt(this.getAttribute('data-index'));
+                stopAutoSlide();
+                goToSlide(index);
+                startAutoSlide();
+            });
+        });
+
+        // Touch swipe support (mobile)
+        const container = slider.parentElement;
+        
+        container.addEventListener('touchstart', function(e) {
+            startX = e.touches[0].clientX;
+            isDragging = true;
+            stopAutoSlide();
+        }, { passive: true });
+
+        container.addEventListener('touchmove', function(e) {
+            if (!isDragging) return;
+            // Just track movement, we'll decide on touchend
+        }, { passive: true });
+
+        container.addEventListener('touchend', function(e) {
+            if (!isDragging) return;
+            isDragging = false;
+            const endX = e.changedTouches[0].clientX;
+            const diff = startX - endX;
+            
+            // Swipe threshold: 50px
+            if (Math.abs(diff) > 50) {
+                if (diff > 0) {
+                    nextSlide();
+                } else {
+                    prevSlide();
+                }
+            }
+            startAutoSlide();
+        }, { passive: true });
+
+        // Mouse drag support (desktop)
+        let mouseStartX = 0;
+        let isMouseDown = false;
+
+        container.addEventListener('mousedown', function(e) {
+            mouseStartX = e.clientX;
+            isMouseDown = true;
+            stopAutoSlide();
+            container.style.cursor = 'grabbing';
+        });
+
+        container.addEventListener('mousemove', function(e) {
+            if (!isMouseDown) return;
+        });
+
+        container.addEventListener('mouseup', function(e) {
+            if (!isMouseDown) return;
+            isMouseDown = false;
+            container.style.cursor = 'grab';
+            const endX = e.clientX;
+            const diff = mouseStartX - endX;
+            
+            if (Math.abs(diff) > 50) {
+                if (diff > 0) {
+                    nextSlide();
+                } else {
+                    prevSlide();
+                }
+            }
+            startAutoSlide();
+        });
+
+        container.addEventListener('mouseleave', function() {
+            if (isMouseDown) {
+                isMouseDown = false;
+                container.style.cursor = 'grab';
+                startAutoSlide();
+            }
+        });
+
+        // Pause on hover (desktop)
+        container.addEventListener('mouseenter', stopAutoSlide);
+        container.addEventListener('mouseleave', startAutoSlide);
+
+        // Initial state
+        goToSlide(0);
+        startAutoSlide();
+    })();
+</script>
+
+</body>
+</html>

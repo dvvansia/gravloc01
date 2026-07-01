@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Supplier Program | GRAVLOC Aerospace</title>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7385FFBGNM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-7385FFBGNM');
+</script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#00050e",
+                        "primary-container": "#0b1f33",
+                        "on-primary-container": "#7587a0",
+                        "secondary": "#545f73",
+                        "surface": "#fbf9fb",
+                        "surface-container": "#efedef",
+                        "surface-container-low": "#f5f3f5",
+                        "surface-container-highest": "#e4e2e4",
+                        "outline": "#74777d",
+                        "outline-variant": "#c4c6cd",
+                        "on-surface": "#1b1c1d",
+                        "on-surface-variant": "#44474c",
+                        "accent-cyan": "#38BDF8",
+                        "error": "#ba1a1a",
+                        "success": "#0f973d",
+                        "warning": "#f59e0b"
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.25rem",
+                        lg: "0.5rem",
+                        xl: "0.75rem",
+                        full: "9999px"
+                    },
+                    spacing: {
+                        "margin-desktop": "48px",
+                        "gutter": "24px",
+                        "margin-mobile": "16px",
+                        "container-max": "1440px"
+                    },
+                    fontFamily: {
+                        "headline-lg": ["Space Grotesk"],
+                        "headline-md": ["Space Grotesk"],
+                        "label-mono": ["JetBrains Mono"],
+                        "body-md": ["Inter"],
+                        "body-sm": ["Inter"]
+                    },
+                    fontSize: {
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "label-mono": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fbf9fb;
+            color: #1b1c1d;
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #0b1f33 0%, #38BDF8 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .stat-card {
+            transition: all 0.2s ease;
+            border: 1px solid #e4e2e4;
+        }
+        .stat-card:hover {
+            border-color: #0b1f33;
+            box-shadow: 0 8px 24px rgba(11, 31, 51, 0.06);
+            transform: translateY(-2px);
+        }
+        .testimonial-card {
+            transition: all 0.2s ease;
+        }
+        .testimonial-card:hover {
+            border-color: #0b1f33;
+            box-shadow: 0 8px 24px rgba(11, 31, 51, 0.06);
+        }
+        .step-number {
+            width: 48px;
+            height: 48px;
+            background: #0b1f33;
+            color: white;
+            border-radius: 9999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        .filter-tab {
+            transition: all 0.15s ease;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+        }
+        .filter-tab:hover {
+            color: #0b1f33;
+        }
+        .filter-tab.active {
+            color: #0b1f33;
+            border-bottom-color: #0b1f33;
+            font-weight: 600;
+        }
+        .demand-card {
+            transition: all 0.2s ease;
+            border-left: 3px solid #38BDF8;
+        }
+        .demand-card:hover {
+            border-color: #0b1f33;
+            box-shadow: 0 4px 16px rgba(11, 31, 51, 0.06);
+        }
+        .pricing-card {
+            transition: all 0.2s ease;
+        }
+        .pricing-card:hover {
+            border-color: #0b1f33;
+            box-shadow: 0 8px 24px rgba(11, 31, 51, 0.08);
+            transform: translateY(-4px);
+        }
+        .pricing-card.recommended {
+            border-color: #0b1f33;
+            box-shadow: 0 8px 24px rgba(11, 31, 51, 0.12);
+        }
+    </style>
+</head>
+<body>
+
+<!-- ============================================================ -->
+<!-- HEADER -->
+<!-- ============================================================ -->
+<header class="sticky top-0 z-50 bg-surface border-b border-outline-variant h-16 md:h-20 w-full">
+    <div class="max-w-container-max mx-auto px-4 md:px-margin-desktop flex justify-between items-center h-full">
+        <div class="flex items-center gap-2 md:gap-8">
+            <button id="mobile-menu-btn" class="lg:hidden -ml-2 p-2 text-on-background" aria-label="Open menu">
+                <span class="material-symbols-outlined">menu</span>
+            </button>
+            <a href="index.html" class="flex items-center gap-1 md:gap-2">
+                <span class="font-headline-lg text-sm md:text-headline-md font-bold tracking-tighter text-primary">GRAVLOC</span>
+            </a>
+            <nav class="hidden lg:flex items-center gap-6">
+                <a class="font-label-mono text-label-mono text-on-surface-variant hover:text-primary transition-colors pb-1" href="dashboard.html">Catalogue</a>
+                <a class="font-label-mono text-label-mono text-on-surface-variant hover:text-primary transition-colors pb-1" href="#">Compare</a>
+                <a class="font-label-mono text-label-mono text-on-surface-variant hover:text-primary transition-colors pb-1" href="rfqs.html">RFQs</a>
+                <a class="font-label-mono text-label-mono text-primary font-bold border-b-2 border-primary pb-1" href="suppliers.html">Suppliers</a>
+                <a class="font-label-mono text-label-mono text-on-surface-variant hover:text-primary transition-colors pb-1" href="#">My AVL</a>
+            </nav>
+        </div>
+        <div class="flex items-center gap-2 md:gap-6">
+            <div class="hidden lg:flex items-center gap-2 px-3 py-1.5 bg-surface-container-low rounded border border-outline-variant">
+                <span class="material-symbols-outlined text-[18px]">search</span>
+                <span class="font-label-mono text-label-mono text-on-surface-variant">Quick Search</span>
+                <span class="font-label-mono text-[10px] bg-outline-variant px-1 rounded">⌘K</span>
+            </div>
+            <div class="flex items-center gap-2 md:gap-3 pl-0 md:pl-4 md:border-l border-outline-variant">
+                <div class="hidden sm:flex flex-col items-end">
+                    <span class="font-label-mono text-xs md:text-label-mono text-on-surface font-bold">A. Vance</span>
+                    <span class="font-label-mono text-[8px] md:text-[10px] text-on-surface-variant">Procurement Officer</span>
+                </div>
+                <div class="w-8 h-8 md:w-10 md:h-10 rounded-full bg-primary-container flex items-center justify-center text-white">
+                    <span class="material-symbols-outlined text-sm md:text-base">account_circle</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden lg:hidden bg-surface border-b border-outline-variant shadow-lg">
+        <nav class="flex flex-col px-4 py-4 gap-1">
+            <a class="font-label-mono text-label-mono text-on-surface-variant px-3 py-3 rounded hover:bg-surface-container hover:text-primary" href="dashboard.html">Catalogue</a>
+            <a class="font-label-mono text-label-mono text-on-surface-variant px-3 py-3 rounded hover:bg-surface-container hover:text-primary" href="#">Compare</a>
+            <a class="font-label-mono text-label-mono text-on-surface-variant px-3 py-3 rounded hover:bg-surface-container hover:text-primary" href="rfqs.html">RFQs</a>
+            <a class="font-label-mono text-label-mono text-primary font-bold px-3 py-3 rounded hover:bg-surface-container" href="suppliers.html">Suppliers</a>
+            <a class="font-label-mono text-label-mono text-on-surface-variant px-3 py-3 rounded hover:bg-surface-container hover:text-primary" href="#">My AVL</a>
+        </nav>
+    </div>
+</header>
+
+<!-- ============================================================ -->
+<!-- HERO SECTION -->
+<!-- ============================================================ -->
+<section class="relative overflow-hidden bg-gradient-to-br from-primary-container/5 via-surface to-surface py-16 md:py-24 border-b border-outline-variant">
+    <div class="max-w-container-max mx-auto px-4 md:px-margin-desktop">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+                <div class="inline-flex items-center gap-2 px-3 py-1 bg-secondary-container text-on-secondary-container rounded-full mb-4">
+                    <span class="material-symbols-outlined text-[14px] md:text-[16px]" style="font-variation-settings: 'FILL' 1;">rocket_launch</span>
+                    <span class="font-label-mono text-[8px] md:text-[10px] uppercase tracking-widest">Supplier Network</span>
+                </div>
+                <h1 class="font-display-lg text-3xl md:text-display-lg text-primary mb-4 leading-tight">
+                    Grow Your Business with <br><span class="gradient-text">GRAVLOC</span>
+                </h1>
+                <p class="font-body-lg text-base md:text-body-lg text-on-surface-variant mb-6 max-w-lg">
+                    Connect with qualified buyers actively sourcing space-grade components. Join the trusted supplier network used by engineers worldwide.
+                </p>
+                <div class="flex flex-wrap items-center gap-4">
+                    <button class="bg-primary-container text-white px-6 md:px-8 py-3 md:py-3.5 rounded-lg font-button-text text-sm md:text-base hover:bg-primary transition-all flex items-center gap-2">
+                        Get Started
+                        <span class="material-symbols-outlined text-sm md:text-base">arrow_forward</span>
+                    </button>
+                    <button onclick="document.getElementById('pricing').scrollIntoView({ behavior: 'smooth', block: 'start' })" class="border border-outline-variant text-on-surface-variant px-6 md:px-8 py-3 md:py-3.5 rounded-lg font-button-text text-sm md:text-base hover:bg-surface-container transition-colors">
+                        View Plans
+                    </button>
+                </div>
+                <div class="flex items-center gap-4 mt-6 text-on-surface-variant/70">
+                    <span class="font-label-mono text-[10px] uppercase tracking-wider">Trusted by 100+ suppliers</span>
+                    <span class="w-px h-4 bg-outline-variant"></span>
+                    <span class="font-label-mono text-[10px] uppercase tracking-wider">Active in 20+ countries</span>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+                <div class="bg-white border border-outline-variant rounded-xl p-6 text-center stat-card">
+                    <span class="font-display-lg text-3xl md:text-4xl text-accent-cyan">25k+</span>
+                    <p class="font-label-mono text-[10px] uppercase text-on-surface-variant tracking-wider mt-1">Monthly Engineers</p>
+                </div>
+                <div class="bg-white border border-outline-variant rounded-xl p-6 text-center stat-card">
+                    <span class="font-display-lg text-3xl md:text-4xl text-accent-cyan">400+</span>
+                    <p class="font-label-mono text-[10px] uppercase text-on-surface-variant tracking-wider mt-1">Missions Supported</p>
+                </div>
+                <div class="bg-white border border-outline-variant rounded-xl p-6 text-center stat-card">
+                    <span class="font-display-lg text-3xl md:text-4xl text-accent-cyan">$1B+</span>
+                    <p class="font-label-mono text-[10px] uppercase text-on-surface-variant tracking-wider mt-1">Business Opportunities</p>
+                </div>
+                <div class="bg-white border border-outline-variant rounded-xl p-6 text-center stat-card">
+                    <span class="font-display-lg text-3xl md:text-4xl text-accent-cyan">10k+</span>
+                    <p class="font-label-mono text-[10px] uppercase text-on-surface-variant tracking-wider mt-1">Procurement Requests</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- USED BY LOGOS / TRUST BAR -->
+<!-- ============================================================ -->
+<section class="py-8 md:py-12 bg-surface-container-low border-b border-outline-variant">
+    <div class="max-w-container-max mx-auto px-4 md:px-margin-desktop">
+        <p class="font-label-mono text-[10px] text-on-surface-variant uppercase tracking-widest text-center mb-6">Trusted by engineers from leading space organizations</p>
+        <div class="flex flex-wrap items-center justify-center gap-8 md:gap-12 opacity-60">
+            <span class="font-headline-md text-sm md:text-base text-on-surface-variant/50">OHB</span>
+            <span class="font-headline-md text-sm md:text-base text-on-surface-variant/50">DLR</span>
+            <span class="font-headline-md text-sm md:text-base text-on-surface-variant/50">Airbus</span>
+            <span class="font-headline-md text-sm md:text-base text-on-surface-variant/50">ESA</span>
+            <span class="font-headline-md text-sm md:text-base text-on-surface-variant/50">Polaris</span>
+            <span class="font-headline-md text-sm md:text-base text-on-surface-variant/50">TUM</span>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- HOW IT WORKS -->
+<!-- ============================================================ -->
+<section class="py-12 md:py-20 bg-surface">
+    <div class="max-w-container-max mx-auto px-4 md:px-margin-desktop">
+        <div class="text-center max-w-2xl mx-auto mb-10 md:mb-12">
+            <span class="font-label-mono text-[10px] text-accent-cyan uppercase tracking-widest">Quick Setup</span>
+            <h2 class="font-headline-lg text-2xl md:text-headline-lg text-primary mt-2">Your Direct Channel to the Global Space Supply Chain</h2>
+            <p class="font-body-sm text-sm md:text-body-sm text-on-surface-variant mt-2">In just a few minutes, you can connect your products with the people who need them most</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="text-center">
+                <div class="flex justify-center mb-4">
+                    <div class="step-number">1</div>
+                </div>
+                <h3 class="font-headline-md text-lg md:text-headline-md text-primary">List Your Products</h3>
+                <p class="font-body-sm text-sm md:text-body-sm text-on-surface-variant mt-2">Easily upload your products. Add technical details, CAD files, and datasheets to attract potential buyers.</p>
+            </div>
+            <div class="text-center">
+                <div class="flex justify-center mb-4">
+                    <div class="step-number">2</div>
+                </div>
+                <h3 class="font-headline-md text-lg md:text-headline-md text-primary">Receive Qualified Inquiries</h3>
+                <p class="font-body-sm text-sm md:text-body-sm text-on-surface-variant mt-2">Receive direct inquiries from interested buyers. Our platform connects you instantly, turning discovery into a conversation.</p>
+            </div>
+            <div class="text-center">
+                <div class="flex justify-center mb-4">
+                    <div class="step-number">3</div>
+                </div>
+                <h3 class="font-headline-md text-lg md:text-headline-md text-primary">Accelerate Your Sales</h3>
+                <p class="font-body-sm text-sm md:text-body-sm text-on-surface-variant mt-2">Track product interest with our analytics dashboard. Manage your pipeline and convert inquiries into sales.</p>
+            </div>
+        </div>
+        <div class="text-center mt-8">
+            <p class="font-label-mono text-[10px] text-on-surface-variant">Average setup time is ~15 minutes</p>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- TESTIMONIALS -->
+<!-- ============================================================ -->
+<section class="py-12 md:py-20 bg-surface-container-low">
+    <div class="max-w-container-max mx-auto px-4 md:px-margin-desktop">
+        <div class="text-center max-w-2xl mx-auto mb-10 md:mb-12">
+            <span class="font-label-mono text-[10px] text-accent-cyan uppercase tracking-widest">Testimonials</span>
+            <h2 class="font-headline-lg text-2xl md:text-headline-lg text-primary mt-2">What Our Suppliers Say</h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="testimonial-card bg-white border border-outline-variant rounded-xl p-6 md:p-8">
+                <div class="flex gap-1 text-accent-cyan mb-4">
+                    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                </div>
+                <p class="font-body-md text-base md:text-body-md text-on-surface-variant italic mb-6">
+                    "GRAVLOC has revolutionized how we reach new customers. The platform allows us to present our products to the right audiences at the right time. It has significantly accelerated our business growth."
+                </p>
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center font-headline-md text-accent-cyan">SK</div>
+                    <div>
+                        <div class="font-headline-md text-body-md">Sarah K.</div>
+                        <div class="font-label-mono text-[10px] uppercase text-on-surface-variant">Sales Manager, NexGen Systems</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card bg-white border border-outline-variant rounded-xl p-6 md:p-8">
+                <div class="flex gap-1 text-accent-cyan mb-4">
+                    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                </div>
+                <p class="font-body-md text-base md:text-body-md text-on-surface-variant italic mb-6">
+                    "Unlike how sales traditionally works in the space industry, GRAVLOC provides a transparent way for buyers to find suitable suppliers. We've met many of our customers here for the first time."
+                </p>
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center font-headline-md text-accent-cyan">TY</div>
+                    <div>
+                        <div class="font-headline-md text-body-md">Thomas Y.</div>
+                        <div class="font-label-mono text-[10px] uppercase text-on-surface-variant">CEO, Helios Power</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- PRICING -->
+<!-- ============================================================ -->
+<section id="pricing" class="py-12 md:py-20 bg-surface">
+    <div class="max-w-container-max mx-auto px-4 md:px-margin-desktop">
+        <div class="text-center max-w-2xl mx-auto mb-10 md:mb-12">
+            <span class="font-label-mono text-[10px] text-accent-cyan uppercase tracking-widest">Pricing</span>
+            <h2 class="font-headline-lg text-2xl md:text-headline-lg text-primary mt-2">Choose the Right Plan for Your Business</h2>
+            <p class="font-body-sm text-sm md:text-body-sm text-on-surface-variant mt-2">Start free, upgrade when you need more visibility and features</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            <!-- Free Plan -->
+            <div class="pricing-card bg-white border border-outline-variant rounded-xl p-6 md:p-8">
+                <h3 class="font-headline-md text-lg text-primary">Free</h3>
+                <p class="font-label-mono text-[10px] text-on-surface-variant uppercase tracking-widest mt-1">Getting Started</p>
+                <div class="mt-4">
+                    <span class="font-display-lg text-3xl text-primary">$0</span>
+                    <span class="font-body-sm text-on-surface-variant">/mo</span>
+                </div>
+                <ul class="space-y-3 mt-6">
+                    <li class="flex items-center gap-2 text-body-sm text-on-surface-variant">
+                        <span class="material-symbols-outlined text-success text-sm">check_circle</span>
+                        50 product listings
+                    </li>
+                    <li class="flex items-center gap-2 text-body-sm text-on-surface-variant">
+                        <span class="material-symbols-outlined text-success text-sm">check_circle</span>
+                        Basic supplier profile
+                    </li>
+                    <li class="flex items-center gap-2 text-body-sm text-on-surface-variant">
+                        <span class="material-symbols-outlined text-success text-sm">check_circle</span>
+                        Standard visibility
+                    </li>
+                    <li class="flex items-center gap-2 text-body-sm text-on-surface-variant opacity-50">
+                        <span class="material-symbols-outlined text-sm">close</span>
+                        Advanced analytics
+                    </li>
+                    <li class="flex items-center gap-2 text-body-sm text-on-surface-variant opacity-50">
+                        <span class="material-symbols-outlined text-sm">close</span>
+                        Priority support
+                    </li>
+                </ul>
+                <button class="w-full mt-8 border border-outline-variant text-on-surface-variant px-6 py-3 rounded-lg font-button-text text-sm hover:bg-surface-container transition-colors">
+                    Get Started
+                </button>
+            </div>
+
+            <!-- Standard Plan - Recommended -->
+            <div class="pricing-card recommended bg-white border-2 border-primary-container rounded-xl p-6 md:p-8 relative">
+                <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary-container text-white text-[8px] font-label-mono px-3 py-0.5 rounded-full uppercase tracking-widest">Recommended</div>
+                <h3 class="font-headline-md text-lg text-primary">Standard</h3>
+                <p class="font-label-mono text-[10px] text-on-surface-variant uppercase tracking-widest mt-1">For Growing Teams</p>
+                <div class="mt-4">
+                    <span class="font-display-lg text-3xl text-primary">$149</span>
+                    <span class="font-body-sm text-on-surface-variant">/mo</span>
+                </div>
+                <ul class="space-y-3 mt-6">
+                    <li class="flex items-center gap-2 text-body-sm text-on-surface-variant">
+                        <span class="material-symbols-outlined text-success text-sm">check_circle</span>
+                        500 product listings
+                    </li>
+                    <li class="flex items-center gap-2 text-body-sm text-on-surface-variant">
+                        <span class="material-symbols-outlined text-success text-sm">check_circle</span>
+                        Enhanced supplier profile
+                    </li>
+                    <li class="flex items-center gap-2 text-body-sm text-on-surface-variant">
+                        <span class="material-symbols-outlined text-success text-sm">check_circle</span>
+                        Featured visibility
+                    </li>
+                    <li class="flex items-center gap-2 text-body-sm text-on-surface-variant">
+                        <span class="material-symbols-outlined text-success text-sm">check_circle</span>
+                        Advanced analytics dashboard
+                    </li>
+                    <li class="flex items-center gap-2 text-body-sm text-on-surface-variant">
+                        <span class="material-symbols-outlined text-success text-sm">check_circle</span>
+                        Priority support
+                    </li>
+                </ul>
+                <button class="w-full mt-8 bg-primary-container text-white px-6 py-3 rounded-lg font-button-text text-sm hover:bg-primary transition-all">
+                    Start Free Trial
+                </button>
+            </div>
+
+            <!-- Enterprise Plan -->
+            <div class="pricing-card bg-white border border-outline-variant rounded-xl p-6 md:p-8">
+                <h3 class="font-headline-md text-lg text-primary">Enterprise</h3>
+                <p class="font-label-mono text-[10px] text-on-surface-variant uppercase tracking-widest mt-1">Custom Solutions</p>
+                <div class="mt-4">
+                    <span class="font-display-lg text-3xl text-primary">Custom</span>
+                    <span class="font-body-sm text-on-surface-variant">/mo</span>
+                </div>
+                <ul class="space-y-3 mt-6">
+                    <li class="flex items-center gap-2 text-body-sm text-on-surface-variant">
+                        <span class="material-symbols-outlined text-success text-sm">check_circle</span>
+                        Unlimited listings
+                    </li>
+                    <li class="flex items-center gap-2 text-body-sm text-on-surface-variant">
+                        <span class="material-symbols-outlined text-success text-sm">check_circle</span>
+                        White-label portal
+                    </li>
+                    <li class="flex items-center gap-2 text-body-sm text-on-surface-variant">
+                        <span class="material-symbols-outlined text-success text-sm">check_circle</span>
+                        API access
+                    </li>
+                    <li class="flex items-center gap-2 text-body-sm text-on-surface-variant">
+                        <span class="material-symbols-outlined text-success text-sm">check_circle</span>
+                        Dedicated account manager
+                    </li>
+                    <li class="flex items-center gap-2 text-body-sm text-on-surface-variant">
+                        <span class="material-symbols-outlined text-success text-sm">check_circle</span>
+                        Custom integrations
+                    </li>
+                </ul>
+                <button class="w-full mt-8 border border-outline-variant text-on-surface-variant px-6 py-3 rounded-lg font-button-text text-sm hover:bg-surface-container transition-colors">
+                    Contact Sales
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<!-- ============================================================ -->
+<!-- CTA SECTION -->
+<!-- ============================================================ -->
+<section class="py-12 md:py-16 bg-primary-container">
+    <div class="max-w-container-max mx-auto px-4 md:px-margin-desktop text-center">
+        <h2 class="font-headline-lg text-2xl md:text-headline-lg text-white">Join Today & Connect with Leads Tomorrow</h2>
+        <p class="text-on-primary-container mt-3 max-w-lg mx-auto text-sm md:text-base">Thousands of buyers are searching for components and services on GRAVLOC right now. Create your free profile and start listing products.</p>
+        <button class="bg-white text-primary-container px-8 md:px-12 py-3 md:py-4 rounded-lg font-button-text text-sm md:text-base hover:scale-[1.02] transition-transform mt-6 inline-flex items-center gap-2">
+            Get Started for Free
+            <span class="material-symbols-outlined text-sm md:text-base">arrow_forward</span>
+        </button>
+        <p class="text-on-primary-container/60 text-xs mt-3">No credit card required • Set up in 15 minutes</p>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- FOOTER -->
+<!-- ============================================================ -->
+<footer class="bg-[#303032] border-t border-[#c4c6cd]">
+    <div class="max-w-container-max mx-auto px-4 md:px-margin-desktop py-12 md:py-16 grid grid-cols-12 gap-4 md:gap-gutter">
+        <div class="col-span-12 lg:col-span-4 space-y-4 md:space-y-6">
+            <img alt="GRAVLOC" class="h-6 md:h-8 w-auto object-contain brightness-0 invert" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjsSv4799yK9-MHKyNleAkZOa3IMtVQT45gksNHw-YsdPIOqU1Vfp1SqEhWgSU3u-yOxEhD6TrtdwHvz0eK83tyTLBSfZLgWYc6fhUz2Cj5mrjr06Wx2SjvCiYDRaxyANgtg62ZGYxg-UDDY2GFZJCWzU7RWgr6fCfeXs6vRWrjUsHIuGtd8HoXKQzfwNwREHNjxdsqNssM-tegcA3zDsWZ_TQZSeU4cxXONIOPhnzPqNGYIlhSfNWjtWZgp4ExFYvIrDxCzrFdVfa">
+            <p class="text-[#f2f0f2] font-body-sm max-w-xs opacity-70 text-sm md:text-body-sm">
+                © 2026 GRAVLOC. All rights reserved. Precision procurement for mission-critical systems.
+            </p>
+            <div class="flex gap-4">
+                <a href="#" class="text-[#f2f0f2] opacity-70 hover:opacity-100 transition-opacity" aria-label="Facebook">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                </a>
+                <a href="#" class="text-[#f2f0f2] opacity-70 hover:opacity-100 transition-opacity" aria-label="LinkedIn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                </a>
+                <a href="#" class="text-[#f2f0f2] opacity-70 hover:opacity-100 transition-opacity" aria-label="Instagram">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg>
+                </a>
+            </div>
+        </div>
+        <div class="col-span-6 lg:col-span-2 space-y-3 md:space-y-4">
+            <h4 class="font-label-mono text-[10px] md:text-xs text-white uppercase tracking-widest">Platform</h4>
+            <ul class="space-y-1.5 md:space-y-2">
+                <li><a class="text-[#c4c6cd] hover:text-white transition-colors text-xs md:text-body-sm" href="dashboard.html">Catalogue</a></li>
+                <li><a class="text-[#c4c6cd] hover:text-white transition-colors text-xs md:text-body-sm" href="#">Compare</a></li>
+                <li><a class="text-[#c4c6cd] hover:text-white transition-colors text-xs md:text-body-sm" href="rfqs.html">RFQs</a></li>
+                <li><a class="text-[#c4c6cd] hover:text-white transition-colors text-xs md:text-body-sm" href="suppliers.html">Suppliers</a></li>
+            </ul>
+        </div>
+        <div class="col-span-6 lg:col-span-2 space-y-3 md:space-y-4">
+            <h4 class="font-label-mono text-[10px] md:text-xs text-white uppercase tracking-widest">Compliance</h4>
+            <ul class="space-y-1.5 md:space-y-2">
+                <li><a class="text-[#c4c6cd] hover:text-white transition-colors text-xs md:text-body-sm" href="#">ITAR Policy</a></li>
+                <li><a class="text-[#c4c6cd] hover:text-white transition-colors text-xs md:text-body-sm" href="#">Quality Assurance</a></li>
+                <li><a class="text-[#c4c6cd] hover:text-white transition-colors text-xs md:text-body-sm" href="#">Ethics Code</a></li>
+                <li><a class="text-[#c4c6cd] hover:text-white transition-colors text-xs md:text-body-sm" href="#">Certifications</a></li>
+            </ul>
+        </div>
+        <div class="col-span-6 lg:col-span-2 space-y-3 md:space-y-4">
+            <h4 class="font-label-mono text-[10px] md:text-xs text-white uppercase tracking-widest">Company</h4>
+            <ul class="space-y-1.5 md:space-y-2">
+                <li><a class="text-[#c4c6cd] hover:text-white transition-colors text-xs md:text-body-sm" href="#">About Us</a></li>
+                <li><a class="text-[#c4c6cd] hover:text-white transition-colors text-xs md:text-body-sm" href="#">Privacy Policy</a></li>
+                <li><a class="text-[#c4c6cd] hover:text-white transition-colors text-xs md:text-body-sm" href="#">Terms of Service</a></li>
+            </ul>
+        </div>
+        <div class="col-span-6 lg:col-span-2 space-y-3 md:space-y-4">
+            <h4 class="font-label-mono text-[10px] md:text-xs text-white uppercase tracking-widest">Support</h4>
+            <ul class="space-y-1.5 md:space-y-2">
+                <li><a class="text-[#c4c6cd] hover:text-white transition-colors text-xs md:text-body-sm" href="#">Contact Support</a></li>
+                <li><a class="text-[#c4c6cd] hover:text-white transition-colors text-xs md:text-body-sm" href="#">Documentation</a></li>
+                <li><a class="text-[#c4c6cd] hover:text-white transition-colors text-xs md:text-body-sm" href="#">Supplier Portal</a></li>
+            </ul>
+        </div>
+    </div>
+</footer>
+
+<!-- ============================================================ -->
+<!-- SCRIPTS -->
+<!-- ============================================================ -->
+<script>
+    // Mobile menu toggle
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    if (menuBtn && mobileMenu) {
+        menuBtn.addEventListener('click', () => {
+            const isOpen = !mobileMenu.classList.contains('hidden');
+            mobileMenu.classList.toggle('hidden');
+            menuBtn.setAttribute('aria-expanded', String(!isOpen));
+            menuBtn.querySelector('.material-symbols-outlined').textContent = isOpen ? 'menu' : 'close';
+        });
+    }
+
+    // Scroll to Pricing section
+    function scrollToPricing() {
+        const pricingSection = document.getElementById('pricing');
+        if (pricingSection) {
+            pricingSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    }
+
+    // The View Plans button already has onclick in the HTML, so we don't need to attach it here
+    // But keep this as a fallback
+
+    // Filter tabs
+    document.querySelectorAll('.filter-tab').forEach(tab => {
+        tab.addEventListener('click', function() {
+            document.querySelectorAll('.filter-tab').forEach(t => {
+                t.classList.remove('active', 'text-primary', 'border-primary');
+                t.classList.add('text-on-surface-variant');
+            });
+            this.classList.add('active', 'text-primary', 'border-primary');
+            this.classList.remove('text-on-surface-variant');
+        });
+    });
+
+    // Search shortcut
+    document.addEventListener('keydown', (e) => {
+        if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+            e.preventDefault();
+            const searchInput = document.querySelector('input[placeholder*="Search"]');
+            if (searchInput) searchInput.focus();
+        }
+    });
+</script>
+
+</body>
+</html>
