@@ -2,7 +2,6 @@ Set-Location "D:\University of Bremen\StartUp\Website"
 
 # Get the current branch name
 $currentBranch = git branch --show-current
-
 Write-Host "Current branch: $currentBranch"
 
 # Check for ALL changes (including untracked files)
@@ -23,6 +22,10 @@ if ($status) {
     
     $commitMessage = "Automated commit: $(Get-Date -Format "yyyy-MM-dd HH:mm:ss")"
     git commit -m $commitMessage
+    
+    # Try to pull latest changes before pushing
+    Write-Host "Pulling latest changes from remote..."
+    git pull --rebase origin $currentBranch
     
     # Push to the current branch
     git push origin $currentBranch
