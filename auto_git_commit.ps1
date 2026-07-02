@@ -18,8 +18,10 @@ if ($status) {
     
     $commitMessage = "Automated commit: $(Get-Date -Format "yyyy-MM-dd HH:mm:ss")"
     git commit -m $commitMessage
-    git push origin main
-    Write-Host "Changes committed and pushed successfully."
+    
+    # Push local master to remote main
+    git push origin master:main
+    Write-Host "Changes committed and pushed to main."
 } else {
     Write-Host "No uncommitted changes."
 }
